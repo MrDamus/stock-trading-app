@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { connect } from 'react-redux'
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import Suggestions from './Suggestions'
+import { selectCompany } from './actions'
 import { withRouter } from 'react-router-dom'
 
-const ENDPINT = 'https://api.iextrading.com/1.0/'
-const ENDPOINT_companies = `${ENDPINT}/ref-data/symbols`
+const ENDPOINT = 'https://api.iextrading.com/1.0/'
+const ENDPOINT_companies = `${ENDPOINT}/ref-data/symbols`
 
 const resp = {"logo":{"url":"https://storage.googleapis.com/iex/api/logos/AAPL.png"},"price":188.59}
 const data = [{ name: 'a', value: 5 }, { name: 'b', value: 15 } , { name: 'c', value: 25 }]
@@ -29,10 +31,11 @@ class App extends Component {
   }
 
   getPrice(symbol) {
-    fetch(`${ENDPINT}/stock/${symbol}/price`)
+    fetch(`${ENDPOINT}/stock/${symbol}/price`)
       .then(response => response.json())
       .then(data => this.setState({ price: data }))
-      .then(() => this.props.history.push('/about'))
+      .then(() => this.props.selectProfile( symbol, this.state.price))
+      .then(() => this.props.history.push('/info'))
       .catch(e => console.warn('Fetching error:', e));
   }
 
@@ -45,8 +48,6 @@ class App extends Component {
     document.getElementById('companyInfo').innerHTML(c)
     
   }
-
-
 
   render() {
     const { companies, inputValue } = this.state;
@@ -81,4 +82,10 @@ class App extends Component {
   }
 }
 
-export default withRouter(({ history }) => <App history={history} />);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    selectProfile: (symbol, price) => dispatch(selectCompany(symbol, price)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(App);

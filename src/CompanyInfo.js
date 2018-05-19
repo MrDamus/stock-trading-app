@@ -3,14 +3,16 @@ import './App.css';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import Suggestions from './Suggestions'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-const ENDPINT = 'https://api.iextrading.com/1.0/'
-const ENDPOINT_companies = `${ENDPINT}/ref-data/symbols`
+
+const ENDPOINT = 'https://api.iextrading.com/1.0/'
+const ENDPOINT_companies = `${ENDPOINT}/ref-data/symbols`
 
 const resp = {"logo":{"url":"https://storage.googleapis.com/iex/api/logos/AAPL.png"},"price":188.59}
 const data = [{ name: 'a', value: 5 }, { name: 'b', value: 15 } , { name: 'c', value: 25 }]
 
-class App extends Component {
+class CompanyInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,7 +31,7 @@ class App extends Component {
   }
 
   getPrice(symbol) {
-    fetch(`${ENDPINT}/stock/${symbol}/price`)
+    fetch(`${ENDPOINT}/stock/${symbol}/price`)
       .then(response => response.json())
       .then(data => this.setState({ price: data }))
       .then(() => this.props.history.push('/about'))
@@ -49,39 +51,27 @@ class App extends Component {
 
 
   render() {
+    console.log(this.props.price);
     const { companies, inputValue } = this.state;
     const searching = companies.filter(({ name, symbol }) =>
       name.toLowerCase().match(inputValue.toLowerCase()) ||
       symbol.toLowerCase().match(inputValue.toLowerCase())
     )
     return (
-      <div className="App">
-        <form>
-          <input
-            type="text"
-            id="searchInput"
-            onChange={(e) =>  this.setState({inputValue:e.currentTarget.value.toUpperCase()})}
-            placeholder="Search for company">
-          </input>
-          <Suggestions companies={inputValue ? searching.slice(0, 5) : []}
-            onSelect={(c) => this.getPrice(c) }
-          />
-        </form>
+      <div className="CompanyInfo">
+      
         <div id="companyInfo">
-
+          <p>
+            {`price of company: ${this.props.price}`}
+          </p>
         </div>
-        <LineChart width={730} height={250} data={data}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis dataKey="value" />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="value" stroke="#8884d8" />
-        </LineChart>
       </div>
     );
   }
 }
 
-export default withRouter(({ history }) => <App history={history} />);
+const mapStateToProps = ({stockData}) => ({
+  price: stockData.price
+})
+
+export default connect(mapStateToProps)(CompanyInfo);
