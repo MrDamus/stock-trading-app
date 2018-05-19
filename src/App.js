@@ -1,45 +1,60 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import React from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import HomePage from './HomePage';
+import CompanyInfo from './CompanyInfo';
 
-const ENDPOINT_Symbols = 'https://api.iextrading.com/1.0/ref-data/symbols'
+const BasicExample = () => (
+  <Router>
+    <div>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/info">Info</Link>
+        </li>
+        <li>
+          <Link to="/topics">Topics</Link>
+        </li>
+      </ul>
 
-const resp = {"logo":{"url":"https://storage.googleapis.com/iex/api/logos/AAPL.png"},"price":188.59}
-const data = [{ name: 'a', value: 5 }, { name: 'b', value: 15 } , { name: 'c', value: 25 }]
+      <hr />
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      symbols: []
-    };
-  }
+      <Route exact path="/" component={HomePage} />
+      <Route path="/info" component={CompanyInfo} />
+      <Route path="/topics" component={Topics} />
+    </div>
+  </Router>
+);
 
-  componentDidMount() {
-    fetch(ENDPOINT_Symbols)
-      .then(response => response.json())
-      .then(data => this.setState({ symbols: data.map(d => ({ symbol: d.symbol, name: d.name })) }))
-      .catch(e => console.warn('Fetching error:', e));
-  }
+const Topics = ({ match }) => (
+  <div>
+    <h2>Topics</h2>
+    <ul>
+      <li>
+        <Link to={`${match.url}/rendering`}>Rendering with React</Link>
+      </li>
+      <li>
+        <Link to={`${match.url}/components`}>Components</Link>
+      </li>
+      <li>
+        <Link to={`${match.url}/props-v-state`}>Props v. State</Link>
+      </li>
+    </ul>
 
-  render() {
-    return (
-      <div className="App">
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for company"></input>
-        {/* dodac dzialajacy search bar */}
-        <LineChart width={730} height={250} data={data}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis dataKey="value" />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="value" stroke="#8884d8" />
-        </LineChart>
-      </div>
-    );
-  }
-}
+    <Route path={`${match.url}/:topicId`} component={Topic} />
+    <Route
+      exact
+      path={match.url}
+      render={() => <h3>Please select a topic.</h3>}
+    />
+  </div>
+);
 
-export default App;
+const Topic = ({ match }) => (
+  <div>
+    <h3>{match.params.topicId}</h3>
+  </div>
+);
+
+export default BasicExample;
