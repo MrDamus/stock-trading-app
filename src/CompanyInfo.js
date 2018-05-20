@@ -9,7 +9,6 @@ import { connect } from 'react-redux'
 const ENDPOINT = 'https://api.iextrading.com/1.0/'
 const ENDPOINT_companies = `${ENDPOINT}/ref-data/symbols`
 
-const resp = {"logo":{"url":"https://storage.googleapis.com/iex/api/logos/AAPL.png"},"price":188.59}
 const data = [{ name: 'a', value: 5 }, { name: 'b', value: 15 } , { name: 'c', value: 25 }]
 
 class CompanyInfo extends Component {
@@ -19,23 +18,27 @@ class CompanyInfo extends Component {
       inputValue: '',
       query: '',
       companies: [],
-      price: ''
+      price: '',
+      chart: []
     };
   }
 
   componentDidMount() {
-    fetch(ENDPOINT_companies)
-      .then(response => response.json())
-      .then(data => this.setState({ companies: data.map(d => ({ symbol: d.symbol, name: d.name })) }))
-      .catch(e => console.warn('Fetching error:', e));
+   this.getChart(this.props.symbol)
   }
 
   getPrice(symbol) {
-    fetch(`${ENDPOINT}/stock/${symbol}/price`)
+    fetch(`${ENDPOINT}stock/${symbol}/price`)
       .then(response => response.json())
       .then(data => this.setState({ price: data }))
       .then(() => this.props.history.push('/about'))
       .catch(e => console.warn('Fetching error:', e));
+  }
+  getChart(symbol) {
+    fetch(`${ENDPOINT}stock/${symbol}/chart`)
+    .then(response => response.json())
+    .then(data => this.setState({ chart: data }))
+    .catch(e => console.warn('Fetching error:', e));
   }
 
   handleInputChange() {
@@ -45,18 +48,9 @@ class CompanyInfo extends Component {
 
   displayCompanyInfo(c) {
     document.getElementById('companyInfo').innerHTML(c)
-    
   }
 
-
-
-  render() {
-    console.log(this.props.price);
-    const { companies, inputValue } = this.state;
-    const searching = companies.filter(({ name, symbol }) =>
-      name.toLowerCase().match(inputValue.toLowerCase()) ||
-      symbol.toLowerCase().match(inputValue.toLowerCase())
-    )
+  render() {    
     return (
       <div className="CompanyInfo">
       
@@ -64,6 +58,15 @@ class CompanyInfo extends Component {
           <p>
             {`price of company: ${this.props.price}`}
           </p>
+          <LineChart width={730} height={250} data={this.state.chart}
+          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" />
+          <YAxis dataKey="open" />
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="open" stroke="#8884d8" />
+        </LineChart>
         </div>
       </div>
     );
@@ -71,7 +74,8 @@ class CompanyInfo extends Component {
 }
 
 const mapStateToProps = ({stockData}) => ({
-  price: stockData.price
+  price: stockData.price,
+  symbol: stockData.symbol
 })
 
 export default connect(mapStateToProps)(CompanyInfo);
