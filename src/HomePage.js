@@ -7,6 +7,8 @@ import { selectCompany } from './actions'
 const ENDPOINT = 'https://api.iextrading.com/1.0/'
 const ENDPOINT_companies = `${ENDPOINT}/ref-data/symbols`
 
+const SERVER_ENDPOINT = 'http://localhost:8080/'
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +16,8 @@ class App extends Component {
       inputValue: '',
       query: '',
       companies: [],
-      price: ''
+      price: '',
+      users: []
     };
   }
 
@@ -22,6 +25,11 @@ class App extends Component {
     fetch(ENDPOINT_companies)
       .then(response => response.json())
       .then(data => this.setState({ companies: data.map(d => ({ symbol: d.symbol, name: d.name })) }))
+      .catch(e => console.warn('Fetching error:', e));
+
+    fetch(`${SERVER_ENDPOINT}users`)
+      .then(response => response.json())
+      .then(data => this.setState({ users: data }))
       .catch(e => console.warn('Fetching error:', e));
   }
 
