@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
-import Suggestions from './Suggestions'
-import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 
 const ENDPOINT = 'https://api.iextrading.com/1.0/'
-const ENDPOINT_companies = `${ENDPOINT}/ref-data/symbols`
-
-const data = [{ name: 'a', value: 5 }, { name: 'b', value: 15 } , { name: 'c', value: 25 }]
-
 class CompanyInfo extends Component {
   constructor(props) {
     super(props);
@@ -39,15 +33,6 @@ class CompanyInfo extends Component {
     .then(response => response.json())
     .then(data => this.setState({ chart: data }))
     .catch(e => console.warn('Fetching error:', e));
-  }
-
-  handleInputChange() {
-    this.setState({
-      query: this.search.value
-  })}
-
-  displayCompanyInfo(c) {
-    document.getElementById('companyInfo').innerHTML(c)
   }
 
   render() {    

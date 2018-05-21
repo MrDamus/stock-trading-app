@@ -47,11 +47,6 @@ class App extends Component {
       query: this.search.value
   })}
 
-  displayCompanyInfo(c) {
-    document.getElementById('companyInfo').innerHTML(c)
-    
-  }
-
   render() {
     const { companies, inputValue } = this.state;
     const searching = companies.filter(({ name, symbol }) =>

@@ -2,7 +2,6 @@ const INITIAL_STATE = {
   price: 0,
 }
 
-
 const stockData = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'SELECT_COMPANY':
