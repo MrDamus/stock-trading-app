@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { connect } from 'react-redux';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-// import "./Login.css";
-
-
 
 class Login extends Component {
   constructor(props) {
@@ -15,64 +11,43 @@ class Login extends Component {
       companies: [],
       price: '',
       chart: [],
-      id: {
-        name: "",
+      user: {
+        name: "Test",
         email: "",
         password: ""
       }
     };
+    this.validateForm = this.validateForm.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-  componentDidMount() {
-  //  this.getChart(this.props.symbol)
-  }
-
-
-  // render() {    
-  //   return (
-  //     <div className="Login">
-  //      <p>Login</p>
-  //     </div>
-  //   )
-  // }
-
-
-
 
   validateForm() {
-    return this.state.id.email.length > 0 && this.state.id.password.length > 0;
+    return this.state.user.email.length > 0 && this.state.user.password.length > 0;
   }
 
-  handleChange = event => {
+  handleChange(event) {
     this.setState({
-      [event.target.id]: event.target.value
+      user: {...this.state.user, [event.target.id] : event.target.value}
     });
   }
 
-  handleSubmit = event => {
+  handleSubmit(event) {
     event.preventDefault();
+    this.createNewUser(this.state.user);
   }
 
 
-//   createNewProfile(profile) {
-//     const formData = new FormData();
-//     formData.append('name', profile.firstName);
-//     // formData.append('last_name', profile.lastName);
-//     formData.append('email', profile.email);
-//     return fetch('http://example.com/api/v1/registration', {
-//         method: 'POST',
-//         body: formData
-//     })
-//     .then(response => response.json())
-//   }
-
-// // createNewProfile(profile)
-// //    .then((json) => {
-// //        // handle success
-// //     })
-// //    .catch(error => error);
-
-
+  createNewUser(user) {
+    return fetch('http://localhost:8080/users', {
+        method: 'POST',
+        body: JSON.stringify(user),
+        headers: {
+          'content-type': 'application/json'
+        },
+    })
+    .catch(e => console.warn(e))
+  }
 
   render() {
     return (
@@ -83,14 +58,14 @@ class Login extends Component {
             <FormControl
               autoFocus
               type="email"
-              value={this.state.email}
+              value={this.state.user.email}
               onChange={this.handleChange}
             />
           </FormGroup>
           <FormGroup controlId="password" bsSize="large">
             <ControlLabel>Password</ControlLabel>
             <FormControl
-              value={this.state.password}
+              value={this.state.user.password}
               onChange={this.handleChange}
               type="password"
             />
@@ -106,7 +81,7 @@ class Login extends Component {
           <Button
             block
             bsSize="large"
-            // disabled={!this.createNewProfile()}
+            disabled={!this.validateForm()}
             type="submit"
           >
             Create account
@@ -116,8 +91,5 @@ class Login extends Component {
     );
   }
 }
-const mapStateToProps = ({stockData}) => ({
-  price: stockData.price,
-  symbol: stockData.symbol
-});
-export default connect(mapStateToProps)(Login);
+
+export default Login;

@@ -23,9 +23,7 @@ const BasicExample = () => (
       <hr />
 
     {/*TODO: Login Button  */}
-    
-
-
+          
       <Route exact path="/" component={HomePage} />
       <Route path="/info" component={CompanyInfo} />
       <Route path="/login" component={Login} />
@@ -35,17 +33,6 @@ const BasicExample = () => (
   </Router>
 );
 
-// const Login = ({ match }) => (
-//   <div>
-//     Login page
-
-
-//     {/*TODO:Login  */}
-
-
-//     {/*TODO: Create an account */}
-//   </div>
-// );
 
 
 export default BasicExample;
