@@ -26,8 +26,17 @@ class Login extends Component {
     return this.state.user.email.length > 0 && this.state.user.password.length > 0;
   }
 
-  validateUser() {
-    
+  login() {
+      fetch(`http://localhost:8080/users/${this.state.user.email}`, {
+          method: 'POST',
+          body: JSON.stringify({ password: this.state.user.password }),
+          headers: {
+            'content-type': 'application/json'
+          },
+      })
+      .then((data) => console.warn(data))
+     // .then(() => this.props.history.push('/profile'))
+      
   }
 
   handleChange(event) {
@@ -38,7 +47,7 @@ class Login extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.createNewUser(this.state.user);
+   // this.createNewUser(this.state.user);
   }
 
 
@@ -50,7 +59,8 @@ class Login extends Component {
           'content-type': 'application/json'
         },
     })
-    .then(() => this.props.history.push('/profile'))
+    .then((data) => console.warn(data))
+ //   .then(() => this.props.history.push('/profile'))
     .catch(e => console.warn(e))
   }
 
@@ -80,7 +90,7 @@ class Login extends Component {
             bsSize="large"
             disabled={!this.validateForm()}
             type="submit"
-            onClick={this.validateUser()}
+            onClick={() => this.login()}
           >
             Login
           </Button>

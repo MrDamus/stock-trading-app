@@ -42,9 +42,11 @@ class Profile extends Component {
   render() {    
     return (
       <div className="Profile">
-        {`Profile name: ${this.state.user.name}, E-mail: ${this.state.user.email} Money: ${this.state.user.money}`}
+        {`Profile name: ${this.state.user.name}
+          E-mail: ${this.state.user.email} 
+          Money: ${this.state.user.money}`}
         <div className="wallet">
-        {/* {`Stock owned: ${this.state.wallet.symbol} : Amount owned: ${this.state.wallet.amount}`} */}
+        {/* {`You own: ${this.state.wallet.amount} of ${this.state.wallet.symbol} company. `} */}
 
        
         </div> 
