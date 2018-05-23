@@ -9,7 +9,7 @@ const ENDPOINT_companies = `${ENDPOINT}/ref-data/symbols`
 
 const SERVER_ENDPOINT = 'http://localhost:8080/'
 
-class App extends Component {
+class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,6 +19,7 @@ class App extends Component {
       price: '',
       users: []
     };
+    this.getCompanyDetails = this.getCompanyDetails.bind(this)
   }
 
   componentDidMount() {
@@ -33,11 +34,10 @@ class App extends Component {
       .catch(e => console.warn('Fetching error:', e));
   }
 
-  getPrice(symbol) {
-    fetch(`${ENDPOINT}/stock/${symbol}/price`)
+  getCompanyDetails(symbol) {
+    fetch(`${ENDPOINT}/stock/${symbol}/batch?types=quote,chart`)
       .then(response => response.json())
-      .then(data => this.setState({ price: data }))
-      .then(() => this.props.selectProfile( symbol, this.state.price))
+      .then(data => this.props.selectProfile({ details: data.quote, chartData: data.chart  }))
       .then(() => this.props.history.push('/info'))
       .catch(e => console.warn('Fetching error:', e));
   }
@@ -54,7 +54,7 @@ class App extends Component {
       symbol.toLowerCase().match(inputValue.toLowerCase())
     )
     return (
-      <div className="App">
+      <div className="HomePage">
         <form>
           <input
             type="text"
@@ -63,7 +63,7 @@ class App extends Component {
             placeholder="Search for company">
           </input>
           <Suggestions companies={inputValue ? searching.slice(0, 5) : []}
-            onSelect={(c) => this.getPrice(c) }
+            onSelect={this.getCompanyDetails}
           />
         </form>
 
@@ -78,4 +78,12 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(App);
+HomePage.propTypes = {
+  
+};
+
+HomePage.defaultProps = {
+ 
+}
+
+export default connect(null, mapDispatchToProps)(HomePage);

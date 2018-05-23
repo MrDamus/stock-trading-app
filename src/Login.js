@@ -26,6 +26,10 @@ class Login extends Component {
     return this.state.user.email.length > 0 && this.state.user.password.length > 0;
   }
 
+  validateUser() {
+    
+  }
+
   handleChange(event) {
     this.setState({
       user: {...this.state.user, [event.target.id] : event.target.value}
@@ -46,6 +50,7 @@ class Login extends Component {
           'content-type': 'application/json'
         },
     })
+    .then(() => this.props.history.push('/profile'))
     .catch(e => console.warn(e))
   }
 
@@ -75,6 +80,7 @@ class Login extends Component {
             bsSize="large"
             disabled={!this.validateForm()}
             type="submit"
+            onClick={this.validateUser()}
           >
             Login
           </Button>

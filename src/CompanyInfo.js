@@ -2,65 +2,48 @@ import React, { Component } from 'react';
 import './App.css';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types';
 
-
-const ENDPOINT = 'https://api.iextrading.com/1.0/'
-class CompanyInfo extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      inputValue: '',
-      query: '',
-      companies: [],
-      price: '',
-      chart: []
-    };
-  }
-
-  componentDidMount() {
-   this.getChart(this.props.symbol)
-  }
-
-  getPrice(symbol) {
-    fetch(`${ENDPOINT}stock/${symbol}/price`)
-      .then(response => response.json())
-      .then(data => this.setState({ price: data }))
-      .then(() => this.props.history.push('/about'))
-      .catch(e => console.warn('Fetching error:', e));
-  }
-  getChart(symbol) {
-    fetch(`${ENDPOINT}stock/${symbol}/chart`)
-    .then(response => response.json())
-    .then(data => this.setState({ chart: data }))
-    .catch(e => console.warn('Fetching error:', e));
-  }
-
-  render() {    
-    return (
+const CompanyInfo = ({price, symbol, companyName, chart }) => (
       <div className="CompanyInfo">
-      
         <div id="companyInfo">
           <p>
-            {`price of company: ${this.props.price}`}
+            {`Latest price of ${symbol} ${companyName} is ${price}`}
           </p>
-          <LineChart width={730} height={250} data={this.state.chart}
+          <LineChart width={730} height={250} data={chart}
           margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid strokeDasharray="5 5" />
           <XAxis dataKey="date" />
           <YAxis dataKey="open" />
           <Tooltip />
           <Legend />
           <Line type="monotone" dataKey="open" stroke="#8884d8" />
+          <Line type="monotone" dataKey="close" stroke="#8884d8" />
+          
         </LineChart>
         </div>
       </div>
     );
-  }
-}
 
 const mapStateToProps = ({stockData}) => ({
-  price: stockData.price,
-  symbol: stockData.symbol
+  price: stockData.details.latestPrice,
+  symbol: stockData.details.symbol,
+  companyName: stockData.details.companyName,
+  chart: stockData.chartData
 })
+
+CompanyInfo.propTypes = {
+  price: PropTypes.any,
+  symbol: PropTypes.string,
+  companyName: PropTypes.string,
+  chart: PropTypes.array
+};
+
+CompanyInfo.defaultProps = {
+  price: '0',
+  symbol: 'company symbol',
+  companyName: 'company name',
+  chart: {}
+}
 
 export default connect(mapStateToProps)(CompanyInfo);

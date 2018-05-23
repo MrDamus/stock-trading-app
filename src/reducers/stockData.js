@@ -1,22 +1,16 @@
 const INITIAL_STATE = {
-  price: 0,
+  chartData: [],
+  details: []
 }
 
 const stockData = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'SELECT_COMPANY':
-    console.warn('SELECT_COMPANY', action.symbol, action.price)
       return {
         ...state,
-          symbol: action.symbol,
-          price: action.price,
+        details: action.payload.details,
+        chartData: action.payload.chartData
       }
-    case 'TOGGLE_TODO':
-      return state.map(todo =>
-        (todo.id === action.id)
-          ? {...todo, completed: !todo.completed}
-          : todo
-      )
     default:
       return state
   }

@@ -1,6 +1,5 @@
 
-export const selectCompany = (symbol, price) => ({
+export const selectCompany = (payload) => ({
   type: 'SELECT_COMPANY',
-  symbol,
-  price,
+  payload
 })

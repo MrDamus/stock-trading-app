@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import HomePage from './HomePage';
 import CompanyInfo from './CompanyInfo';
 import Login from './Login';
+import Profile from './Profile';
 
-const BasicExample = () => (
+const App = () => (
   <Router>
     <div>
 {/* Debug Menu  */}
@@ -18,6 +19,9 @@ const BasicExample = () => (
         <li>
           <Link to="/login">Login</Link>
         </li>
+        <li>
+          <Link to="/profile">Profile</Link>
+        </li>
       </ul>
 
       <hr />
@@ -28,11 +32,11 @@ const BasicExample = () => (
       <Route path="/info" component={CompanyInfo} />
       <Route path="/login" component={Login} />
       {/*TODO: Profile Route  */}
-      {/* <Route path="/profile" component={Profile} /> */}
+      <Route path="/profile" component={Profile} />
     </div>
   </Router>
 );
 
 
 
-export default BasicExample;
+export default App;
