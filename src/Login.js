@@ -29,7 +29,7 @@ class Login extends Component {
   }
 
   login() {
-      fetch(serverUrl, this.state.user.email, {
+      fetch(`http://localhost:8080/users/${this.state.user.email}`, {
           method: 'POST',
           body: JSON.stringify({ password: this.state.user.password }),
           headers: {
@@ -37,7 +37,7 @@ class Login extends Component {
           },
       })
       .then((data) => console.warn(data))
-     // .then(() => this.props.history.push('/profile'))
+      .then(() => this.props.history.push('/profile'))
   }
 
   handleChange(event) {

@@ -9,7 +9,7 @@ class Profile extends Component {
       companies: [],
       price: '',
       user: {
-        name: "Test",
+        name: "",
         email: "",
         password: "",
         wallet: [],
