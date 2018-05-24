@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
-import { connect } from 'react-redux'
+import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 const CompanyInfo = ({price, symbol, companyName, chart }) => (
@@ -21,6 +22,16 @@ const CompanyInfo = ({price, symbol, companyName, chart }) => (
           <Line type="monotone" dataKey="close" stroke="#8884d8" />
           
         </LineChart>
+
+        <Button
+            block
+            bsSize="large"
+            // disabled={!this.validateMoney()}
+            type="submit"
+            onClick={() => this.buyStock()}
+          >
+            Buy securities
+          </Button>
         </div>
       </div>
     );

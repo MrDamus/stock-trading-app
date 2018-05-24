@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
+const serverUrl = 'http://localhost:8080/users/'
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -12,7 +14,7 @@ class Login extends Component {
       price: '',
       chart: [],
       user: {
-        name: "Test",
+        name: "",
         email: "",
         password: ""
       }
@@ -27,7 +29,7 @@ class Login extends Component {
   }
 
   login() {
-      fetch(`http://localhost:8080/users/${this.state.user.email}`, {
+      fetch(serverUrl, this.state.user.email, {
           method: 'POST',
           body: JSON.stringify({ password: this.state.user.password }),
           headers: {
@@ -36,7 +38,6 @@ class Login extends Component {
       })
       .then((data) => console.warn(data))
      // .then(() => this.props.history.push('/profile'))
-      
   }
 
   handleChange(event) {
@@ -47,12 +48,12 @@ class Login extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-   // this.createNewUser(this.state.user);
+    this.createNewUser(this.state.user);
   }
 
 
   createNewUser(user) {
-    return fetch('http://localhost:8080/users', {
+    return fetch(serverUrl, {
         method: 'POST',
         body: JSON.stringify(user),
         headers: {
@@ -60,14 +61,37 @@ class Login extends Component {
         },
     })
     .then((data) => console.warn(data))
- //   .then(() => this.props.history.push('/profile'))
+    // .then(() => this.props.history.push('/profile'))
     .catch(e => console.warn(e))
+  }
+
+  clearDatabase(e) {
+    fetch(serverUrl, {
+        method: 'DELETE',
+        body: e,
+    })
+  //   .then(res => res.json())
+  //  .then(json => {
+  //   this.setState({user: this.state.user.filter(user => { 
+  //     return user._id !== e._id // change this to match your code if necessary
+  //   })})
+    // .then((e) => console.log(e))
+    console.log('All records from database has been cleared.')
   }
 
   render() {
     return (
       <div className="Login">
         <form onSubmit={this.handleSubmit}>
+          <FormGroup controlId="name" bsSize="large">
+            <ControlLabel>Name</ControlLabel>
+            <FormControl
+              autoFocus
+              type="name"
+              value={this.state.user.name}
+              onChange={this.handleChange}
+            />
+          </FormGroup>
           <FormGroup controlId="email" bsSize="large">
             <ControlLabel>Email</ControlLabel>
             <FormControl
@@ -99,8 +123,17 @@ class Login extends Component {
             bsSize="large"
             disabled={!this.validateForm()}
             type="submit"
+            // onClick={()=> this.createNewUser()}
           >
             Create account
+          </Button>
+          <Button
+            block
+            bsSize="large"
+            // type="submit"
+            onClick={() => this.clearDatabase()}
+          >
+            Clear database
           </Button>
         </form>
       </div>
