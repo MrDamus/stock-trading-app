@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { loginSuccess } from './actions'
+import userData from './reducers/userData';
+
+
 
 const serverUrl = 'http://localhost:8080/users/'
 
@@ -36,8 +42,13 @@ class Login extends Component {
             'content-type': 'application/json'
           },
       })
-      .then((data) => console.warn(data))
+      .then((data) => data.json())
+      .then(data => {
+        console.warn(data)
+        this.props.loginSuccess(data)
+      })
       .then(() => this.props.history.push('/profile'))
+      .catch(e => alert(e))
   }
 
   handleChange(event) {
@@ -48,8 +59,14 @@ class Login extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.createNewUser(this.state.user);
   }
+
+  handleErrors(response) {
+    if (!response.ok) {
+      throw response.json();
+    }
+    return response;
+}
 
 
   createNewUser(user) {
@@ -60,9 +77,13 @@ class Login extends Component {
           'content-type': 'application/json'
         },
     })
-    .then((data) => console.warn(data))
-    // .then(() => this.props.history.push('/profile'))
-    .catch(e => console.warn(e))
+    .then(this.handleErrors)
+    .then((data) => data.json())
+    .then(() => this.props.history.push('/profile'))
+    .catch(e => {
+      Promise.resolve(e)
+      .then(a => alert(a.error))
+    })
   }
 
   clearDatabase(e) {
@@ -123,7 +144,7 @@ class Login extends Component {
             bsSize="large"
             disabled={!this.validateForm()}
             type="submit"
-            // onClick={()=> this.createNewUser()}
+            onClick={()=> this.createNewUser(this.state.user)}
           >
             Create account
           </Button>
@@ -141,4 +162,19 @@ class Login extends Component {
   }
 }
 
-export default Login;
+// TODO: map dispatch top props, LOGIN
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginSuccess: (user) => dispatch(loginSuccess(user)),
+  }
+}
+
+Login.propTypes = {
+  // user: propTypes.array
+};
+
+Login.defaultProps = {
+  user: []
+}
+
+export default connect(null, mapDispatchToProps)(Login);
