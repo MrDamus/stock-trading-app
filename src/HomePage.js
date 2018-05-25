@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux'
+import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import Suggestions from './Suggestions'
 import { selectCompany } from './actions'
+import PropTypes from 'prop-types';
+
 
 const ENDPOINT = 'https://api.iextrading.com/1.0/'
 const ENDPOINT_companies = `${ENDPOINT}/ref-data/symbols`
@@ -55,6 +58,7 @@ class HomePage extends Component {
     )
     return (
       <div className="HomePage">
+        <Button bsStyle="primary">Primary</Button>
         <form>
           <input
             type="text"
@@ -79,11 +83,11 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 HomePage.propTypes = {
-  
+  selectProfile: PropTypes.func
 };
 
 HomePage.defaultProps = {
- 
+ selectProfile: {}
 }
 
 export default connect(null, mapDispatchToProps)(HomePage);
