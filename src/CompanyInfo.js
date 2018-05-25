@@ -4,6 +4,7 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'r
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import StockAmountPicker from './companyInfo/stockAmountPicker'
 
 const CompanyInfo = ({price, symbol, companyName, chart }) => (
       <div className="CompanyInfo">
@@ -22,16 +23,9 @@ const CompanyInfo = ({price, symbol, companyName, chart }) => (
           <Line type="monotone" dataKey="close" stroke="#8884d8" />
           
         </LineChart>
-
-        <Button
-            block
-            bsSize="large"
-            // disabled={!this.validateMoney()}
-            type="submit"
-            onClick={() => this.buyStock()}
-          >
-            Buy securities
-          </Button>
+        <div>
+          <StockAmountPicker />
+          </div>
         </div>
       </div>
     );
