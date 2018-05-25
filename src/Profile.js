@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 
 class Profile extends Component {
@@ -36,14 +37,18 @@ class Profile extends Component {
 
   render() {
     return (
-      <div className="Profile" style='{}'>
+      <div className="Profile" style={{ width: '100%' }}>
         {`
           Profile name: ${this.props.user.name}
           E-mail: ${this.props.user.email} 
           Money: ${this.props.user.money}
         `}
         <div className="wallet">
-        {/* {`You own: ${this.state.wallet.amount} of ${this.state.wallet.symbol} company. `} */}
+        <h3>Wallet</h3>
+        <ul>
+        {`You own: ${this.state.wallet} of ${this.state.wallet} company. `}
+
+        </ul>
         </div> 
       </div>
     );
@@ -55,5 +60,19 @@ class Profile extends Component {
 const mapStateToProps = ({userData}) => ({
   user: userData.user,
 })
+
+Profile.propTypes = {
+  name: PropTypes.string,
+  symbol: PropTypes.string,
+  email: PropTypes.string,
+  money: PropTypes.number
+};
+
+Profile.defaultProps = {
+  name: 'Name',
+  symbol: 'company symbol',
+  email: 'email',
+  money: 0
+}
 
 export default connect(mapStateToProps)(Profile);
