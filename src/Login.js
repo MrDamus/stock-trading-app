@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button, FormGroup, FormControl, ControlLabel, InputGroup } from "react-bootstrap";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { loginSuccess } from './actions'
@@ -20,9 +20,9 @@ class Login extends Component {
       price: '',
       chart: [],
       user: {
-        name: "",
-        email: "",
-        password: ""
+        name: "" || "xyz",
+        email: "" || "xyz@gmail.com",
+        password: "" || "xyz"
       }
     };
     this.validateForm = this.validateForm.bind(this);
@@ -91,57 +91,63 @@ class Login extends Component {
         method: 'DELETE',
         body: e,
     })
-  //   .then(res => res.json())
-  //  .then(json => {
-  //   this.setState({user: this.state.user.filter(user => { 
-  //     return user._id !== e._id // change this to match your code if necessary
-  //   })})
-    // .then((e) => console.log(e))
     console.log('All records from database has been cleared.')
   }
 
   render() {
     return (
-      <div className="Login">
+      <div className="Login" style={{ width: '100%' }}>
         <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="name" bsSize="large">
-            <ControlLabel>Name</ControlLabel>
-            <FormControl
-              autoFocus
-              type="name"
-              value={this.state.user.name}
-              onChange={this.handleChange}
-            />
+          <FormGroup controlId="name" bsSize="large" style={{ width: '90%', margin: '10px' }}>
+            <InputGroup style={{ width: '90%' }}>
+              <ControlLabel>Name </ControlLabel>
+              <FormControl
+                style={{ width: '50%' }}
+                autoFocus
+                type="name"
+                value={this.state.user.name}
+                onChange={this.handleChange}
+              />
+            </InputGroup>
           </FormGroup>
-          <FormGroup controlId="email" bsSize="large">
-            <ControlLabel>Email</ControlLabel>
-            <FormControl
-              autoFocus
-              type="email"
-              value={this.state.user.email}
-              onChange={this.handleChange}
-            />
+          <FormGroup controlId="email" bsSize="large" style={{ width: '90%', margin: '10px' }}>
+            <InputGroup style={{ width: '90%' }}>
+              <ControlLabel>Email </ControlLabel>
+              <FormControl
+                style={{ width: '50%' }}
+                autoFocus
+                type="email"
+                value={this.state.user.email}
+                onChange={this.handleChange}
+              />
+            </InputGroup>
           </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
-            <ControlLabel>Password</ControlLabel>
+          <FormGroup controlId="password" bsSize="large" style={{ width: '90%', margin: '10px' }}>
+            <ControlLabel>Password </ControlLabel>
+            <InputGroup style={{ width: '90%' }}>
             <FormControl
+              style={{ width: '50%' }}
               value={this.state.user.password}
               onChange={this.handleChange}
               type="password"
             />
+            </InputGroup>
           </FormGroup>
+        <div>
+            <Button
+              block
+              bsStyle="success"
+              disabled={!this.validateForm()}
+              type="submit"
+              onClick={() => this.login()}
+            >
+              Login
+            </Button>
+          </div>
           <Button
             block
             bsSize="large"
-            disabled={!this.validateForm()}
-            type="submit"
-            onClick={() => this.login()}
-          >
-            Login
-          </Button>
-          <Button
-            block
-            bsSize="large"
+            bsStyle="create"
             disabled={!this.validateForm()}
             type="submit"
             onClick={()=> this.createNewUser(this.state.user)}
@@ -151,6 +157,7 @@ class Login extends Component {
           <Button
             block
             bsSize="large"
+            bsStyle="delete"
             // type="submit"
             onClick={() => this.clearDatabase()}
           >
@@ -162,7 +169,7 @@ class Login extends Component {
   }
 }
 
-// TODO: map dispatch top props, LOGIN
+// TODO: map dispatch to props, LOGIN
 const mapDispatchToProps = (dispatch) => {
   return {
     loginSuccess: (user) => dispatch(loginSuccess(user)),
@@ -170,11 +177,11 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 Login.propTypes = {
-  // user: propTypes.array
+  loginSuccess: PropTypes.func,
 };
 
 Login.defaultProps = {
-  user: []
+  loginSuccess: 'Login has succeed'
 }
 
 export default connect(null, mapDispatchToProps)(Login);
