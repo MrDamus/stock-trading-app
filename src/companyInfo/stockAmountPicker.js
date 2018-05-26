@@ -2,25 +2,13 @@ import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { selectValue, buyStock } from '../actions'
 
 class StockAmountPicker extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      amount: 0
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(e) {
-    console.warn(e.target.value);
-    this.setState({ amount : e.target.value })
-  }
-
   render() {
-    const { price, symbol, companyName } = this.props
+    const { price, symbol, companyName, selectValue, buyStock } = this.props
     return (
-      <FormGroup controlId="howMany" bsSize="large">
+      <FormGroup controlId="howMany" bsSize="large" >
         <ControlLabel>Amount:</ControlLabel>
         <FormControl
           style={{ width: '100px' }}
@@ -30,15 +18,15 @@ class StockAmountPicker extends Component {
           min={0}
           max={100000}
           required
-          value={this.state.amount}
-          onChange={this.handleChange}
+          value={this.props.amount}
+          onChange={e => selectValue(e.target.value)}
         />
         <Button
           block
           bsStyle="success"
           // disabled={!this.validateMoney()}
           type="submit"
-        // onClick={() => this.buyStock(symbol, howMany.value)}
+          onClick={buyStock}
         >
           Buy securities
     </Button>
@@ -47,25 +35,23 @@ class StockAmountPicker extends Component {
   }
 }
 
-const mapStateToProps = ({ stockData }) => ({
-  price: stockData.details.latestPrice,
-  symbol: stockData.details.symbol,
-  companyName: stockData.details.companyName,
-  chart: stockData.chartData
+const mapDispatchToProps = (dispatch) => {
+  return {
+    selectValue: (user) => dispatch(selectValue(user)),
+    buyStock: () => dispatch(buyStock()),
+  }
+}
+
+const mapStateToProps = ({ stockPicker }) => ({
+  amount: stockPicker.amount
 })
 
 StockAmountPicker.propTypes = {
-  price: PropTypes.any,
-  symbol: PropTypes.string,
-  companyName: PropTypes.string,
-  chart: PropTypes.array
+  amount: PropTypes.number
 };
 
 StockAmountPicker.defaultProps = {
-  price: '0',
-  symbol: 'company symbol',
-  companyName: 'company name',
-  chart: {}
+  amount: '0',
 }
 
-export default connect(mapStateToProps)(StockAmountPicker);
+export default connect(mapStateToProps, mapDispatchToProps)(StockAmountPicker);
