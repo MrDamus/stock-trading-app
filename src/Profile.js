@@ -16,7 +16,7 @@ class Profile extends Component {
         password: "",
         wallet: [],
         money: 1000
-      }
+      },
     };
   }
 
@@ -32,6 +32,7 @@ class Profile extends Component {
     .then(data => this.setState({ user: data.user.email }))
     .then(data => this.setState({ user: data.user.wallet }))
     
+    
     .catch(e => console.warn(e))
   }
 
@@ -46,7 +47,7 @@ class Profile extends Component {
         <div className="wallet">
         <h3>Wallet</h3>
         <ul>
-        {`You own: ${this.state.wallet} of ${this.state.wallet} company. `}
+        {/* {`You own: ${this.props.wallet} of ${this.props.wallet} company bought on ${this.props.wallet.transactionDetails.date} `} */}
 
         </ul>
         </div> 
