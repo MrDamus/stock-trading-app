@@ -47,15 +47,6 @@ class StockAmountPicker extends Component {
   }
 }
 
-//  buyStock(symbol, ) {
-// let sum = this.howMany.value * price
-// if (sum > money) {
-//   alert(`You don't have enough money.`)
-// } else
-//  this.props.user.money - sum
-//  alert(`You have bought ${howMany.value} stocks of ${companyName}`)
-// }
-
 const mapStateToProps = ({ stockData }) => ({
   price: stockData.details.latestPrice,
   symbol: stockData.details.symbol,
