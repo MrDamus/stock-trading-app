@@ -55,7 +55,7 @@ class HomePage extends Component {
       symbol.toLowerCase().match(inputValue.toLowerCase())
     )
     return (
-      <div className="HomePage">
+      <div className="HomePage" style={{display: 'flex', justifyContent: 'center'}}>
         <form>
           <input
             type="text"
