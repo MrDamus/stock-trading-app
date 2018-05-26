@@ -18,7 +18,7 @@ class StockAmountPicker extends Component {
   }
 
   render() {
-    const { price, symbol, companyName, chart } = this.props
+    const { price, symbol, companyName } = this.props
     return (
       <FormGroup controlId="howMany" bsSize="large">
         <ControlLabel>Amount:</ControlLabel>
@@ -33,16 +33,9 @@ class StockAmountPicker extends Component {
           value={this.state.amount}
           onChange={this.handleChange}
         />
-        <style type="text/css">{`
-    .btn-approve {
-      background-color: green;
-      color: white;
-    }
-    `}
-        </style>
         <Button
           block
-          bsStyle="approve"
+          bsStyle="success"
           // disabled={!this.validateMoney()}
           type="submit"
         // onClick={() => this.buyStock(symbol, howMany.value)}
