@@ -99,8 +99,8 @@ class Login extends Component {
       <div className="Login" style={{ width: '100%' }}>
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="name" bsSize="large" style={{ width: '90%', margin: '10px' }}>
-            <InputGroup style={{ width: '90%' }}>
               <ControlLabel>Name </ControlLabel>
+            <InputGroup style={{ width: '90%' }}>
               <FormControl
                 style={{ width: '50%' }}
                 autoFocus
@@ -111,8 +111,8 @@ class Login extends Component {
             </InputGroup>
           </FormGroup>
           <FormGroup controlId="email" bsSize="large" style={{ width: '90%', margin: '10px' }}>
-            <InputGroup style={{ width: '90%' }}>
               <ControlLabel>Email </ControlLabel>
+            <InputGroup style={{ width: '90%' }}>
               <FormControl
                 style={{ width: '50%' }}
                 autoFocus
@@ -133,9 +133,9 @@ class Login extends Component {
             />
             </InputGroup>
           </FormGroup>
-        <div>
             <Button
               block
+              bsSize="large"
               bsStyle="success"
               disabled={!this.validateForm()}
               type="submit"
@@ -143,11 +143,10 @@ class Login extends Component {
             >
               Login
             </Button>
-          </div>
           <Button
             block
             bsSize="large"
-            bsStyle="create"
+            bsStyle="primary"
             disabled={!this.validateForm()}
             type="submit"
             onClick={()=> this.createNewUser(this.state.user)}
@@ -157,7 +156,7 @@ class Login extends Component {
           <Button
             block
             bsSize="large"
-            bsStyle="delete"
+            bsStyle="danger"
             // type="submit"
             onClick={() => this.clearDatabase()}
           >
