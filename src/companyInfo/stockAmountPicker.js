@@ -6,7 +6,7 @@ import { selectValue, buyStock } from '../actions'
 
 class StockAmountPicker extends Component {
   render() {
-    const { price, symbol, companyName, selectValue, buyStock } = this.props
+    const { price, symbol, companyName, selectValue, buyStock, amount } = this.props
     return (
       <FormGroup controlId="howMany" bsSize="large" >
         <ControlLabel>Amount:</ControlLabel>
@@ -21,6 +21,9 @@ class StockAmountPicker extends Component {
           value={this.props.amount}
           onChange={e => selectValue(e.target.value)}
         />
+        <p>This will cost: {cost(amount, price)}</p>
+        <p>amount: {amount}</p>
+        <p>price: {price}</p>
         <Button
           block
           bsStyle="success"
@@ -29,10 +32,14 @@ class StockAmountPicker extends Component {
           onClick={buyStock}
         >
           Buy securities
-    </Button>
+        </Button>
       </FormGroup>
     )
   }
+}
+
+const cost = (amount, price) => {
+  return amount * price
 }
 
 const mapDispatchToProps = (dispatch) => {

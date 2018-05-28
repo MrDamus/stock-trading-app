@@ -4,7 +4,6 @@ import { Button, FormGroup, FormControl, ControlLabel, InputGroup } from "react-
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { loginSuccess } from './actions'
-import userData from './reducers/userData';
 
 const serverUrl = 'http://localhost:8080/users/'
 
@@ -14,7 +13,6 @@ class Login extends Component {
     this.state = {
       inputValue: '',
       query: '',
-      companies: [],
       price: '',
       chart: [],
       user: {
@@ -95,7 +93,7 @@ class Login extends Component {
     return (
       <div className="Login" style={{ width: '100%' }}>
         <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="name" bsSize="large" style={{ width: '90%', margin: '10px' }}>
+          <FormGroup controlId="name" bsSize="large" style={{ width: '90%', margin: '0 auto' }}>
               <ControlLabel>Name </ControlLabel>
             <InputGroup style={{ width: '90%' }}>
               <FormControl
@@ -107,7 +105,7 @@ class Login extends Component {
               />
             </InputGroup>
           </FormGroup>
-          <FormGroup controlId="email" bsSize="large" style={{ width: '90%', margin: '10px' }}>
+          <FormGroup controlId="email" bsSize="large" style={{ width: '90%', margin: '0 auto' }}>
               <ControlLabel>Email </ControlLabel>
             <InputGroup style={{ width: '90%' }}>
               <FormControl
@@ -119,7 +117,7 @@ class Login extends Component {
               />
             </InputGroup>
           </FormGroup>
-          <FormGroup controlId="password" bsSize="large" style={{ width: '90%', margin: '10px' }}>
+          <FormGroup controlId="password" bsSize="large" style={{ width: '90%', margin: '0 auto' }}>
             <ControlLabel>Password </ControlLabel>
             <InputGroup style={{ width: '90%' }}>
             <FormControl
@@ -130,6 +128,8 @@ class Login extends Component {
             />
             </InputGroup>
           </FormGroup>
+          <div style={{width: '40%', margin: '0 auto'}}>
+
             <Button
               block
               bsSize="large"
@@ -137,9 +137,11 @@ class Login extends Component {
               disabled={!this.validateForm()}
               type="submit"
               onClick={() => this.login()}
-            >
+              >
               Login
             </Button>
+              </div>
+              <div style={{width: '40%', margin: '0 auto'}}>
           <Button
             block
             bsSize="large"
@@ -150,6 +152,8 @@ class Login extends Component {
           >
             Create account
           </Button>
+          </div>
+          <div style={{width: '40%', margin: '0 auto'}}>
           <Button
             block
             bsSize="large"
@@ -159,6 +163,7 @@ class Login extends Component {
           >
             Clear database
           </Button>
+          </div>
         </form>
       </div>
     );

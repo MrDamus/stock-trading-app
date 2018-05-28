@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import moment from 'moment';
+
+
+
+const stocks = (data) => (<p>
+  {`You own: ${data.amount}
+   stock of ${data.symbol}
+   company bought on ${moment(data.date).format('MMM DD h:mm A')}`}
+</p>)
 
 
 class Profile extends Component {
@@ -30,9 +39,7 @@ class Profile extends Component {
     })
     .then(data => this.setState({ user: data.user.name }))
     .then(data => this.setState({ user: data.user.email }))
-    .then(data => this.setState({ user: data.user.wallet }))
-    
-    
+    .then(data => this.setState({ user: data.user.wallet }))    
     .catch(e => console.warn(e))
   }
 
@@ -40,15 +47,14 @@ class Profile extends Component {
     return (
       <div className="Profile" style={{ width: '100%' }}>
         {`
-          Profile name: ${this.props.user.name}
           E-mail: ${this.props.user.email} 
+          Profile name: ${this.props.user.name}
           Money: ${this.props.user.money}
         `}
         <div className="wallet">
         <h3>Wallet</h3>
         <ul>
-        {/* {`You own: ${this.props.wallet} of ${this.props.wallet} company bought on ${this.props.wallet.transactionDetails.date} `} */}
-
+        {this.props.user.wallet.map(stocks)}
         </ul>
         </div> 
       </div>
@@ -56,8 +62,6 @@ class Profile extends Component {
   }
 }
 
-
-// TODO: map state to props user data
 const mapStateToProps = ({userData}) => ({
   user: userData.user,
 })
