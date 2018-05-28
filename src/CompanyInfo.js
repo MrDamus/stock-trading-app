@@ -24,7 +24,7 @@ const CompanyInfo = ({price, symbol, companyName, chart }) => (
           
         </LineChart>
         <div>
-          <StockAmountPicker />
+          <StockAmountPicker price={price}/>
           </div>
         </div>
       </div>
