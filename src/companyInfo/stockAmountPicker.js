@@ -24,6 +24,7 @@ class StockAmountPicker extends Component {
         <p>This will cost: {cost(amount, price)}</p>
         <p>amount: {amount}</p>
         <p>price: {price}</p>
+        <div style={{width: '40%', margin: '0 auto'}}>
         <Button
           block
           bsStyle="success"
@@ -33,13 +34,14 @@ class StockAmountPicker extends Component {
         >
           Buy securities
         </Button>
+        </div>
       </FormGroup>
     )
   }
 }
 
 const cost = (amount, price) => {
-  return amount * price
+  return (amount * price).toFixed(2)
 }
 
 const mapDispatchToProps = (dispatch) => {

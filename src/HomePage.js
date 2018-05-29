@@ -60,7 +60,7 @@ class HomePage extends Component {
           <input
             type="text"
             id="searchInput"
-            onChange={(e) =>  this.setState({inputValue:e.currentTarget.value.toUpperCase()})}
+            onChange={(e) =>  this.setState({inputValue: e.currentTarget.value.toUpperCase().replace(/\W/g, '')})}
             placeholder="Search for company">
           </input>
           <Suggestions companies={inputValue ? searching.slice(0, 5) : []}
