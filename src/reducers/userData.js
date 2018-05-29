@@ -5,36 +5,27 @@ const INITIAL_STATE = {
 "email": "xyz@gmail.com",
 "password": "xyz",
 "wallet": [
-{
-"symbol": "AAPL",
-"amount": "1",
-"price": 188.58,
-"date": 1527533111900
-},
-{
-"symbol": "AAPL",
-"amount": "1",
-"price": 188.58,
-"date": 1527533114655
-},
-{
-"symbol": "AAPL",
-"amount": "2",
-"price": 188.58,
-"date": 1527540331219
-},
-{
-"symbol": "AZZ",
-"amount": "1",
-"price": 43,
-"date": 1527540350133
-},
-{
-"symbol": "TLK",
-"amount": "3",
-"price": 24.88,
-"date": 1527540363699
-}
+  {
+      "symbol": "LOMA",
+      "companyName": "Loma Negra Compania Industrial Argentina Sociedad Anonima ADS",
+      "amount": "11",
+      "price": 12.62,
+      "date": 1527593176915
+  },
+  {
+      "symbol": "LOMA",
+      "companyName": "Loma Negra Compania Industrial Argentina Sociedad Anonima ADS",
+      "amount": "11",
+      "price": 12.62,
+      "date": 1527593181611
+  },
+  {
+      "symbol": "AAPL",
+      "companyName": "Apple Inc.",
+      "amount": "23",
+      "price": 188.58,
+      "date": 1527593220698
+  }
 ],
 "money": 500
   },
