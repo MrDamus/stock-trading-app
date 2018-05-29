@@ -25,6 +25,11 @@ export const buyStockError = (payload) => ({
   payload
 })
 
+export const sellStockSuccess = (payload) => ({
+  type: 'SELL_STOCK_ERROR',
+  payload
+})
+
 
 export function buyStock() {
   return function (dispatch, getState) {
@@ -34,6 +39,7 @@ export function buyStock() {
 
     const transactionDetails = {
       symbol: details.symbol,
+      companyName: details.companyName,
       amount: amount,
       price: details.latestPrice,
       date: Date.now()
@@ -42,6 +48,27 @@ export function buyStock() {
     return makeTransaction(user.email, transactionDetails, 100).then(
       getState => dispatch(buyStockSuccess(getState)),
       error => dispatch(buyStockError(error))
+    );
+  };
+}
+
+export function sellStock() {
+  return function (dispatch, getState) {
+    const { details } = getState().stockData;
+    const { user } = getState().userData;
+    const { amount } = getState().stockPicker;
+
+    const transactionDetails = {
+      symbol: details.symbol,
+      companyName: details.companyName,
+      amount: amount,
+      price: details.latestPrice,
+      date: Date.now()
+    }
+    
+    return makeTransaction(user.email, transactionDetails, 100).then(
+      getState => dispatch(sellStockSuccess(getState)),
+      // error => dispatch(buyStockError(error))
     );
   };
 }
