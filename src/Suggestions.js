@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Popover, ButtonToolbar, OverlayTrigger , Button} from 'react-bootstrap'
+import { Popover, OverlayTrigger , Button} from 'react-bootstrap'
 
 const popoverHoverFocus = (
   <Popover id="suggestionsHover" title="Holy guacamole!">
@@ -13,8 +13,6 @@ const Suggestions = ({ companies, onSelect }) => {
     <ul 
       onClick={() => onSelect(company.symbol)} 
       key={company.symbol}>
-      <ButtonToolbar>
-
       <OverlayTrigger
         trigger={['hover', 'focus']}
         placement="bottom"
@@ -22,13 +20,11 @@ const Suggestions = ({ companies, onSelect }) => {
         >
         <Button>{`${company.symbol}: ${company.name}`}</Button>
       </OverlayTrigger>
-      </ButtonToolbar>
     </ul>
 
   ))
-  return <ul>{options}</ul>
+  return <ul style={{ width: '0px', marginLeft: '-80px'}}>{options}</ul>
 }
-
 
 Suggestions.propTypes = {
   companies: PropTypes.arrayOf(PropTypes.shape({ name : String, symbol: String })),
