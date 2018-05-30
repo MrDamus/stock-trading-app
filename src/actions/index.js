@@ -30,6 +30,11 @@ export const sellStockSuccess = (payload) => ({
   payload
 })
 
+export const sellStockError = (payload) => ({
+  type: 'SELL_STOCK_ERROR',
+  payload
+})
+
 
 export function buyStock() {
   return function (dispatch, getState) {
@@ -68,7 +73,7 @@ export function sellStock() {
     
     return makeTransaction(user.email, transactionDetails, 100).then(
       getState => dispatch(sellStockSuccess(getState)),
-      // error => dispatch(buyStockError(error))
+      error => dispatch(sellStockError(error))
     );
   };
 }
