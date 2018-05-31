@@ -8,10 +8,10 @@ class StockAmountPicker extends Component {
   render() {
     const { price, selectValue, buyStock, amount } = this.props
     return (
-      <FormGroup controlId="howMany" bsSize="large" style={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}} >
-        <ControlLabel style={{margin: '0 auto'}}>Amount:</ControlLabel>
+      <FormGroup controlId="howMany" bsSize="large" style={{display: 'flex', flexDirection: 'column'}} >
+        <ControlLabel style={{alignSelf: 'center'}}>Amount:</ControlLabel>
         <FormControl
-          style={{ width: '25%', margin: '0 auto' }}
+          style={{ width: '25%', alignSelf: 'center' }}
           autoFocus
           type="number"
           placeholder="quantity"
@@ -21,13 +21,12 @@ class StockAmountPicker extends Component {
           value={this.props.amount}
           onChange={e => selectValue(e.target.value)}
           />
-        <p style={{ margin: '0 auto'}}>price: {price}</p>
-        <p style={{ margin: '0 auto'}}>This will cost: {cost(amount, price)}</p>
-        <div style={{ margin: '0 auto'}}>
+        <p style={{ alignSelf: 'center'}}>price: {price}</p>
+        <p style={{ alignSelf: 'center'}}>This will cost: {cost(amount, price)}</p>
+        <div style={{ alignSelf: 'center'}}>
         <Button
           block
           bsStyle="success"
-          // disabled={!this.validateMoney()}
           type="submit"
           onClick={buyStock}
           >
