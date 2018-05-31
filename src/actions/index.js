@@ -35,6 +35,11 @@ export const sellStockError = (payload) => ({
   payload
 })
 
+export const inputName = (payload) => ({
+  type: 'INPUT_NAME',
+  payload
+})
+
 
 export function buyStock() {
   return function (dispatch, getState) {
@@ -49,7 +54,7 @@ export function buyStock() {
       price: details.latestPrice,
       date: Date.now()
     }
-    
+    //3rd parameter of this function is 100 and it's 'money'
     return makeTransaction(user.email, transactionDetails, 100).then(
       getState => dispatch(buyStockSuccess(getState)),
       error => dispatch(buyStockError(error))
@@ -65,7 +70,6 @@ export function sellStock() {
 
     const transactionDetails = {
       symbol: details.symbol,
-      companyName: details.companyName,
       amount: amount,
       price: details.latestPrice,
       date: Date.now()
