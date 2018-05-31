@@ -6,12 +6,12 @@ import { selectValue, buyStock } from '../actions'
 
 class StockAmountPicker extends Component {
   render() {
-    const { price, symbol, companyName, selectValue, buyStock, amount } = this.props
+    const { price, selectValue, buyStock, amount } = this.props
     return (
-      <FormGroup controlId="howMany" bsSize="large" >
-        <ControlLabel>Amount:</ControlLabel>
+      <FormGroup controlId="howMany" bsSize="large" style={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}} >
+        <ControlLabel style={{margin: '0 auto'}}>Amount:</ControlLabel>
         <FormControl
-          style={{ width: '100px' }}
+          style={{ width: '25%', margin: '0 auto' }}
           autoFocus
           type="number"
           placeholder="quantity"
@@ -20,18 +20,17 @@ class StockAmountPicker extends Component {
           required
           value={this.props.amount}
           onChange={e => selectValue(e.target.value)}
-        />
-        <p>This will cost: {cost(amount, price)}</p>
-        <p>amount: {amount}</p>
-        <p>price: {price}</p>
-        <div style={{width: '40%', margin: '0 auto'}}>
+          />
+        <p style={{ margin: '0 auto'}}>price: {price}</p>
+        <p style={{ margin: '0 auto'}}>This will cost: {cost(amount, price)}</p>
+        <div style={{ margin: '0 auto'}}>
         <Button
           block
           bsStyle="success"
           // disabled={!this.validateMoney()}
           type="submit"
           onClick={buyStock}
-        >
+          >
           Buy securities
         </Button>
         </div>
@@ -56,11 +55,18 @@ const mapStateToProps = ({ stockPicker }) => ({
 })
 
 StockAmountPicker.propTypes = {
-  amount: PropTypes.number
+  amount: PropTypes.number,
+  price: PropTypes.number,
+  selectValue: PropTypes.func,
+  buyStock: PropTypes.func,
 };
 
 StockAmountPicker.defaultProps = {
   amount: '0',
+  price: '0',
+  selectValue: () => void(0),
+  buyStock: () => void(0),
+  
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StockAmountPicker);
