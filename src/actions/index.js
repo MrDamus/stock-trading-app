@@ -69,8 +69,8 @@ export function buyStock() {
       price: details.latestPrice,
       date: Date.now()
     }
-    //3rd parameter of this function is 100 and it's 'money'??????
-    return userService.makeTransaction(user.email, transactionDetails, 100).then(
+
+    return userService.makeTransaction(user.email, transactionDetails).then(
       getState => dispatch(buyStockSuccess(getState)),
       error => dispatch(buyStockError(error))
     );

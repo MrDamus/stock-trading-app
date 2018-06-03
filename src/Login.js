@@ -1,40 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import { FormGroup, FormControl, ControlLabel, InputGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { loginSuccess, inputName, inputEmail, inputPassword } from './actions/index'
+import { inputName, inputEmail, inputPassword } from './actions/index'
 import Buttons from './Login/buttons'
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({
-      user: { ...this.state.user, [event.target.id]: event.target.value }
-    });
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-  }
-
-  render() {
-    return (
+const Login = ({inputName, inputEmail, inputPassword, name, email, password}) => (
       <div className="Login" style={{ width: '100%' }}>
-        <form onSubmit={this.handleSubmit} style={{display: 'flex', flexDirection: 'column'}}>
+        <form onSubmit={event => event.preventDefault()} style={{display: 'flex', flexDirection: 'column'}}>
+          {/* Create form input field component  zrobic jeden ogolny component i tylko props sie zmienia w zaleznosci co uzywa*/}
           <FormGroup controlId="name" bsSize="large" style={{ display: 'flex', flexDirection: 'column', alignSelf: 'center' }}>
             <ControlLabel style={{textAlign: 'center'}}>Name </ControlLabel>
             <InputGroup>
               <FormControl
                 autoFocus
                 type="name"
-                value={this.props.name}
-                onChange={(event) => this.props.inputName(event.target.value)}
+                value={name}
+                onChange={(event) => inputName(event.target.value)}
               />
             </InputGroup>
           </FormGroup>
@@ -44,8 +27,8 @@ class Login extends Component {
               <FormControl
                 autoFocus
                 type="email"
-                value={this.props.email}
-                onChange={(event) => this.props.inputEmail(event.target.value)}
+                value={email}
+                onChange={(event) => inputEmail(event.target.value)}
               />
             </InputGroup>
           </FormGroup>
@@ -54,8 +37,8 @@ class Login extends Component {
             <InputGroup>
               <FormControl
                 autoFocus
-                value={this.props.password}
-                onChange={(event) => this.props.inputPassword(event.target.value)}
+                value={password}
+                onChange={(event) => inputPassword(event.target.value)}
                 type="password"
               />
             </InputGroup>
@@ -64,8 +47,6 @@ class Login extends Component {
         </form>
       </div>
     );
-  }
-}
 
 const mapStateToProps = ({loginForm}) => ({
   name: loginForm.name,
@@ -73,23 +54,22 @@ const mapStateToProps = ({loginForm}) => ({
   password: loginForm.password,  
 })
 
-
 // TODO: map dispatch to props, LOGIN
 const mapDispatchToProps = (dispatch) => {
   return {
     inputName: (name) => dispatch(inputName(name)),
     inputEmail: (email) => dispatch(inputEmail(email)),
     inputPassword: (password) => dispatch(inputPassword(password)),
-    loginSuccess: (user) => dispatch(loginSuccess(user)),
   }
 }
 
 Login.propTypes = {
-  loginSuccess: PropTypes.func,
+  inputName: PropTypes.func.isRequired,
+  inputEmail: PropTypes.func.isRequired,
+  inputPassword: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
 };
-
-Login.defaultProps = {
-  loginSuccess: 'Login has succeed'
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

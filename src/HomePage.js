@@ -25,18 +25,15 @@ class HomePage extends Component {
     this.getCompanyDetails = this.getCompanyDetails.bind(this)
   }
 
+  // TODO: MOVE TO ACTIONS AND MAKE ACTION FOR IT
   componentDidMount() {
     fetch(ENDPOINT_companies)
       .then(response => response.json())
       .then(data => this.setState({ companies: data.map(d => ({ symbol: d.symbol, name: d.name })) }))
       .catch(e => console.warn('Fetching error:', e));
-
-    fetch(`${SERVER_ENDPOINT}users`)
-      .then(response => response.json())
-      .then(data => this.setState({ users: data }))
-      .catch(e => console.warn('Fetching error:', e));
   }
 
+  // TODO: MOVE TO ACTIONS AND MAKE ACTION FOR IT
   getCompanyDetails(symbol) {
     fetch(`${ENDPOINT}/stock/${symbol}/batch?types=quote,chart`)
       .then(response => response.json())
@@ -47,6 +44,7 @@ class HomePage extends Component {
 
   handleInputChange() {
     this.setState({
+      // TODO: DO THIS THE SAME WAY AS LOGIN
       query: this.search.value
   })}
 
@@ -68,6 +66,7 @@ class HomePage extends Component {
           >
             Login
           </Button>
+          {/* TODO: MOVE TO SEPARATE COMPONENT */}
         <form style={{display: 'flex', justifyContent: 'center'}}>
           <input
             style={{alignSelf: 'flex-end'}}
@@ -80,7 +79,6 @@ class HomePage extends Component {
             onSelect={this.getCompanyDetails}
           />
         </form>
-
       </div>
     );
   }
