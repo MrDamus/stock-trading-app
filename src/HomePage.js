@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import Suggestions from './Suggestions'
 import { selectCompany } from './actions'
 import PropTypes from 'prop-types';
+import { Button } from "react-bootstrap";
+
 
 const ENDPOINT = 'https://api.iextrading.com/1.0/'
 const ENDPOINT_companies = `${ENDPOINT}/ref-data/symbols`
@@ -55,9 +57,20 @@ class HomePage extends Component {
       symbol.toLowerCase().match(inputValue.toLowerCase())
     )
     return (
-      <div className="HomePage" style={{display: 'flex', justifyContent: 'center'}}>
-        <form>
+      <div className="HomePage" style={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
+        <Button
+            style={{alignSelf: 'flex-end', maxWidth: '100px', marginBottom: '30px'}}
+            block
+            bsSize="small"
+            bsStyle="success"
+            type="submit"
+            // onClick={() => this.props.login()}
+          >
+            Login
+          </Button>
+        <form style={{display: 'flex', justifyContent: 'center'}}>
           <input
+            style={{alignSelf: 'flex-end'}}
             type="text"
             id="searchInput"
             onChange={(e) =>  this.setState({inputValue: e.currentTarget.value.toUpperCase().replace(/\W/g, '')})}
