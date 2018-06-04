@@ -15,7 +15,7 @@ const StockAmountPicker = ({ price, selectValue, buyStock, amount }) => (
       min={0}
       max={100000}
       required
-      value={this.props.amount}
+      value={amount}
       onChange={e => selectValue(e.target.value)}
     />
     <p style={{ alignSelf: 'center' }}>price: {price}</p>
