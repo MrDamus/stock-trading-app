@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
 import { connect } from 'react-redux'
 import Suggestions from './Suggestions'
 import { selectCompany } from './actions'
-import PropTypes from 'prop-types';
-import { Button } from "react-bootstrap";
-
+import PropTypes from 'prop-types'
+import { Button } from "react-bootstrap"
 
 const ENDPOINT = 'https://api.iextrading.com/1.0/'
 const ENDPOINT_companies = `${ENDPOINT}/ref-data/symbols`
@@ -62,14 +61,14 @@ class HomePage extends Component {
             bsSize="small"
             bsStyle="success"
             type="submit"
-            // onClick={() => this.props.login()}
+            onClick={() => this.props.history.push('/login')}
           >
             Login
           </Button>
           {/* TODO: MOVE TO SEPARATE COMPONENT */}
-        <form style={{display: 'flex', justifyContent: 'center'}}>
+        <form style={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
           <input
-            style={{alignSelf: 'flex-end'}}
+            style={{alignSelf: 'center'}}
             type="text"
             id="searchInput"
             onChange={(e) =>  this.setState({inputValue: e.currentTarget.value.toUpperCase().replace(/\W/g, '')})}
