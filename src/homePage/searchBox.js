@@ -15,11 +15,11 @@ const SearchBox = (inputValue, getCompanyDetails) => (
       style={{ alignSelf: 'center' }}
       type="text"
       id="searchInput"
-      // onChange={(e) =>  this.setState({inputValue: e.currentTarget.value.toUpperCase().replace(/\W/g, '')})}
-      onChange={e => inputValue({ inputValue: e.currentTarget.value.toUpperCase().replace(/\W/g, '') })}
+      onChange={e => changeInputValue({ inputValue: e.currentTarget.value.toUpperCase().replace(/\W/g, '') })}
       placeholder="Search for company">
     </input>
-    <Suggestions companies={inputValue ? searching.slice(0, 5) : []}
+    <Suggestions
+      companies={inputValue ? searching([],'').slice(0, 5) : []} // searching([],'') []-companies, ''-input value
       onSelect={getCompanyDetails}
     />
   </form>
@@ -33,7 +33,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = ({ stockPicker }) => ({
-  amount: stockPicker.amount
+  amount: stockPicker.amount // TODO: companies
 })
 
 SearchBox.propTypes = {
@@ -48,7 +48,6 @@ SearchBox.defaultProps = {
   price: '0',
   selectValue: () => null,
   buyStock: () => null,
-
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBox);

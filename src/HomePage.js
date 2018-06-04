@@ -3,14 +3,13 @@ import './App.css'
 import { connect } from 'react-redux'
 // import Suggestions from './Suggestions'
 import { selectCompany } from './actions'
+import { fetchCompaniesData } from './actions/stockData'
 import PropTypes from 'prop-types'
 import { Button } from "react-bootstrap"
 import SearchBox from './homePage/searchBox'
 
 const ENDPOINT = 'https://api.iextrading.com/1.0/'
 const ENDPOINT_companies = `${ENDPOINT}/ref-data/symbols`
-
-const SERVER_ENDPOINT = 'http://localhost:8080/'
 
 class HomePage extends Component {
   constructor(props) {
@@ -27,10 +26,7 @@ class HomePage extends Component {
 
   // TODO: MOVE TO ACTIONS AND MAKE ACTION FOR IT
   componentDidMount() {
-    fetch(ENDPOINT_companies)
-      .then(response => response.json())
-      .then(data => this.setState({ companies: data.map(d => ({ symbol: d.symbol, name: d.name })) }))
-      .catch(e => console.warn('Fetching error:', e));
+    this.props.fetchCompaniesData()
   }
 
   // TODO: MOVE TO ACTIONS AND MAKE ACTION FOR IT
@@ -88,6 +84,7 @@ class HomePage extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     selectProfile: (symbol, price) => dispatch(selectCompany(symbol, price)),
+    fetchCompaniesData: () =>  dispatch(fetchCompaniesData()),
   }
 }
 
