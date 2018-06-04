@@ -5,12 +5,16 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { inputName, inputEmail, inputPassword } from './actions/index'
 import Buttons from './Login/buttons'
+import LoginForm from './Login/loginForm'
 
 const Login = ({inputName, inputEmail, inputPassword, name, email, password}) => (
       <div className="Login" style={{ width: '100%' }}>
         <form onSubmit={event => event.preventDefault()} style={{display: 'flex', flexDirection: 'column'}}>
           {/* Create form input field component  zrobic jeden ogolny component i tylko props sie zmienia w zaleznosci co uzywa*/}
-          <FormGroup controlId="name" bsSize="large" style={{ display: 'flex', flexDirection: 'column', alignSelf: 'center' }}>
+          <LoginForm controlId='Name' controlLabel={inputName} type='name'/>
+          <LoginForm controlLabel={inputEmail}/>
+          <LoginForm controlLabel={inputPassword}/>          
+          {/* <FormGroup controlId="name" bsSize="large" style={{ display: 'flex', flexDirection: 'column', alignSelf: 'center' }}>
             <ControlLabel style={{textAlign: 'center'}}>Name </ControlLabel>
             <InputGroup>
               <FormControl
@@ -42,8 +46,8 @@ const Login = ({inputName, inputEmail, inputPassword, name, email, password}) =>
                 type="password"
               />
             </InputGroup>
-          </FormGroup>
-          <Buttons history={this.props.history} />
+          </FormGroup> */}
+          <Buttons onClick={() => this.props.history.push('/profile')} />
         </form>
       </div>
     );
@@ -54,7 +58,6 @@ const mapStateToProps = ({loginForm}) => ({
   password: loginForm.password,  
 })
 
-// TODO: map dispatch to props, LOGIN
 const mapDispatchToProps = (dispatch) => {
   return {
     inputName: (name) => dispatch(inputName(name)),

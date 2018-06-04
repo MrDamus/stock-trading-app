@@ -60,7 +60,6 @@ StockAmountPicker.defaultProps = {
   price: '0',
   selectValue: () => null,
   buyStock: () => null,
-
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StockAmountPicker);

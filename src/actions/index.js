@@ -15,6 +15,16 @@ export const loginError = (payload) => ({
   payload
 })
 
+export const createNewUserSuccess = (payload) => ({
+  type: 'CREATE_NEW_USER_SUCCESS',
+  payload
+})
+
+export const createNewUserError = (payload) => ({
+  type: 'CREATE_NEW_USER_ERROR',
+  payload
+})
+
 export const selectValue = (payload) => ({
   type: 'SELECT_VALUE',
   payload
@@ -55,6 +65,22 @@ export const inputPassword = (payload) => ({
   payload
 })
 
+export const inputValue = (payload) => ({
+  type: 'INPUT_VALUE',
+  payload
+})
+
+export const getCompanyDetailsSuccess = (payload) => ({
+  type: 'GET_COMPANY_DETAILS_SUCCESS',
+  payload
+})
+
+export const getCompanyDetailsError = (payload) => ({
+  type: 'GET_COMPANY_DETAILS_ERROR',
+  payload
+})
+
+
 
 export function buyStock() {
   return function (dispatch, getState) {
@@ -90,7 +116,7 @@ export function sellStock() {
       date: Date.now()
     }
     
-    return userService.makeTransaction(user.email, transactionDetails, 100).then(
+    return userService.makeTransaction(user.email, transactionDetails).then(
       getState => dispatch(sellStockSuccess(getState)),
       error => dispatch(sellStockError(error))
     );
@@ -112,22 +138,37 @@ export function login() {
   };
 }
 
-export function createNewUser(user) {
-  return fetch(serverUrl, {
-    method: 'POST',
-    body: JSON.stringify(user),
-    headers: {
-      'content-type': 'application/json'
-    },
-  })
-    .then(this.handleErrors)
-    .then((data) => data.json())
-    .then(() => this.props.history.push('/profile'))
-    .catch(e => {
-      Promise.resolve(e)
-        .then(a => alert(a.error))
-    })
+export function createNewUser() {
+  return function (dispatch, getState) {
+    const user  = getState().loginForm;
+
+    return userService.createNewUser(user)
+    .then(
+      getState => dispatch(createNewUserSuccess(getState)) ,
+      error => {
+        dispatch(createNewUserError(error))
+        throw new Error(error)
+      }
+    );
+  };
 }
+
+// export function createNewUser(user) {
+//   return fetch(serverUrl, {
+//     method: 'POST',
+//     body: JSON.stringify(user),
+//     headers: {
+//       'content-type': 'application/json'
+//     },
+//   })
+//     .then(this.handleErrors)
+//     .then((data) => data.json())
+//     .then(() => this.props.history.push('/profile'))
+//     .catch(e => {
+//       Promise.resolve(e)
+//         .then(a => alert(a.error))
+//     })
+// }
 
 export function clearDatabase(e) {
   fetch(serverUrl, {
@@ -137,9 +178,17 @@ export function clearDatabase(e) {
   console.log('All records from database has been cleared.')
 }
 
-export function handleErrors(response) {
-  if (!response.ok) {
-    throw response.json();
-  }
-  return response;
+// export function handleErrors(response) {
+//   if (!response.ok) {
+//     throw response.json();
+//   }
+//   return response;
+// }
+
+export function getCompanyDetails(symbol) {
+  fetch(`${'https://api.iextrading.com/1.0/'}/stock/${symbol}/batch?types=quote,chart`)
+    .then(response => response.json())
+    .then(data => this.props.selectProfile({ details: data.quote, chartData: data.chart  }))
+    .then(() => this.props.history.push('/info'))
+    .catch(e => console.warn('Fetching error:', e));
 }

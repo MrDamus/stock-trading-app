@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -8,6 +7,8 @@ import { sellStock } from './actions';
 import FacebookShareButton from './profile/socialMediaButtons/facebookShareButton'
 import TwitterShareButton from './profile/socialMediaButtons/twitterShareButton'
 import GoogleShareButton from './profile/socialMediaButtons/googleShareButton'
+import TransactionHistory from './profile/transactionHistory'
+import Wallet from './profile/wallet'
 
 // To it's own file
 const stocks = (data) =>
@@ -78,18 +79,20 @@ class Profile extends Component {
           Profile name: ${this.props.user.name}
           Money: ${this.props.user.money}
         `}
-        <div className="wallet">
+        <Wallet/>
+        {/* <div className="wallet">
           <h3>Wallet</h3>
           <ul>
             {this.props.user.wallet.map(stocks)}
           </ul>
-        </div>
-        <div className="transactionHistory">
+        </div> */}
+        <TransactionHistory/>
+        {/* <div className="transactionHistory">
           <h3>Transaction History</h3>
           <ul>
             {this.props.user.wallet.map(transactionHistory)}
           </ul>
-        </div>
+        </div> */}
         <div className="socialMediaButtons">
           <FacebookShareButton />
           <TwitterShareButton />

@@ -11,7 +11,7 @@ const Buttons = ({ login, createNewUser, clearDatabase, isInputValid }) => (
         block
         bsSize="large"
         bsStyle="success"
-        disabled={isInputValid}
+        // disabled={!isInputValid}
         type="submit"
         onClick={login}
       >
@@ -23,7 +23,7 @@ const Buttons = ({ login, createNewUser, clearDatabase, isInputValid }) => (
         block
         bsSize="large"
         bsStyle="primary"
-        disabled={isInputValid}
+        // disabled={isInputValid}
         type="submit"
         onClick={createNewUser}
       >
@@ -66,7 +66,7 @@ Buttons.propTypes = {
   login: PropTypes.func.isRequired,
   clearDatabase: PropTypes.func.isRequired,
   createNewUser: PropTypes.func.isRequired,
-  isInputValid: PropTypes.bool,
+  isInputValid: PropTypes.bool
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Buttons);
