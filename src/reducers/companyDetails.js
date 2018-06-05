@@ -8,9 +8,9 @@ const companyDetails = (state = INITIAL_STATE, action) => {
     case 'GET_COMPANY_DETAILS_SUCCESS':
       return {
         ...state,
-        // details: action.payload.details,
-        // chartData: action.payload.chartData
-        details: action.payload.map(d => ({ details: d.quote, chartData: d.chart }))
+        details: action.payload.details,
+        chartData: action.payload.chartData
+        // details: action.payload.map(d => ({ details: d.quote, chartData: d.chart }))
           }
     default:
       return state

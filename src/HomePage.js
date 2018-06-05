@@ -24,7 +24,7 @@ class HomePage extends Component {
     // this.getCompanyDetails = this.getCompanyDetails.bind(this)
   }
 
-  // TODO: MOVE TO ACTIONS AND MAKE ACTION FOR IT
+  // MOVE TO ACTIONS AND MAKE ACTION FOR IT  done?
   componentDidMount() {
     this.props.fetchCompaniesData()
   }

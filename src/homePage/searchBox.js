@@ -14,16 +14,14 @@ class SearchBox extends Component {
     super(props);
     this.state = {
       inputValue: '',
-      companies: [],
     };
-      // this.getCompanyDetails = this.getCompanyDetails.bind(this)
   }
 
-  componentDidMount() {
-    this.props.fetchCompaniesData()
-  } 
-
   render() {
+    const { inputValue } = this.state;
+    const { companies } = this.props;
+    console.log(companies.length, inputValue)
+    const companiesToDisplay = inputValue ? searching(companies, inputValue).slice(0, 5) : []
     return (
         <form style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
           <input
@@ -35,7 +33,7 @@ class SearchBox extends Component {
             placeholder="Search for company">
           </input>
           <Suggestions
-            companies={this.state.inputValue ? searching([this.state.companies], this.state.inputValue).slice(0, 5) : []} // searching([],'') []-companies, ''-input value
+            companies={companiesToDisplay}
             onSelect={this.getCompanyDetails}
           />
         </form>
@@ -43,11 +41,10 @@ class SearchBox extends Component {
   }
 }
 
-const searching = (companies, inputValue) => companies.filter(({ name, symbol }) =>
-  console.log(companies, inputValue)
-  // name.toLowerCase().match(inputValue.toLowerCase()) ||
-  // symbol.toLowerCase().match(inputValue.toLowerCase())
-)
+const searching = (companies, inputValue) => 
+  companies.filter(({ name, symbol }) =>
+    name.toLowerCase().match(inputValue.toLowerCase()) ||
+    symbol.toLowerCase().match(inputValue.toLowerCase()))
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -58,8 +55,8 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const mapStateToProps = ({ stockData }) => ({
-  companies: stockData.companies, // TODO: companies
+const mapStateToProps = ({ companies }) => ({
+  companies: companies.companies,
 })
 
 SearchBox.propTypes = {
