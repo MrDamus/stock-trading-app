@@ -2,7 +2,7 @@ const INITIAL_STATE = {
   companies: []
 }
 
-const stockData = (state = INITIAL_STATE, action) => {
+const companiesData = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'FETCH_COMPANIES_SUCCESS':
       return {
@@ -14,4 +14,4 @@ const stockData = (state = INITIAL_STATE, action) => {
   }
 }
 
-export default stockData
+export default companiesData
