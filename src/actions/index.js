@@ -70,18 +70,6 @@ export const inputValue = (payload) => ({
   payload
 })
 
-export const getCompanyDetailsSuccess = (payload) => ({
-  type: 'GET_COMPANY_DETAILS_SUCCESS',
-  payload
-})
-
-export const getCompanyDetailsError = (payload) => ({
-  type: 'GET_COMPANY_DETAILS_ERROR',
-  payload
-})
-
-
-
 export function buyStock() {
   return function (dispatch, getState) {
     const { details } = getState().stockData;

@@ -5,6 +5,7 @@ import stockPicker from './stockPickerData'
 import loginForm from './loginForm'
 import companies from './companies'
 import searchBox from './searchBox'
+import companyDetails from './companyDetails'
 
 export default combineReducers({
   stockData,
@@ -13,4 +14,5 @@ export default combineReducers({
   loginForm,
   companies,
   searchBox,
+  companyDetails,
 });
