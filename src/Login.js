@@ -6,13 +6,13 @@ import { inputName, inputEmail, inputPassword } from './actions/loginForm'
 import Buttons from './Login/buttons'
 import FormInput from './Login/loginForm'
 
-const Login = ({inputName, inputEmail, inputPassword, name, email, password}) => (
+const Login = ({inputName, inputEmail, inputPassword, name, email, password, history}) => (
       <div className="Login" style={{ width: '100%' }}>
         <form onSubmit={event => event.preventDefault()} style={{display: 'flex', flexDirection: 'column'}}>
           <FormInput name="name" inputValue={name} onChange={(event) => inputName(event.target.value)} />
           <FormInput name="email" inputValue={email} onChange={(event) => inputEmail(event.target.value)} />
           <FormInput name="password" inputValue={password} onChange={(event) => inputPassword(event.target.value)} />
-          <Buttons onClick={() => this.props.history.push('/profile')} />
+          <Buttons history={history} />
         </form>
       </div>
     );
