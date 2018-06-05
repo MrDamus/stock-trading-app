@@ -23,7 +23,41 @@ function makeTransaction(email, transactionDetails, money) {
     .then(data => data.json())
   }
 
+  export function createNewUser(user) {
+    return fetch('http://localhost:8080/users/', {
+      method: 'POST',
+      body: JSON.stringify(user),
+      headers: {
+        'content-type': 'application/json'
+      },
+    })
+      .then((data) => data.json())
+      }
+
+
+  export function updateUserState(user) {
+        return fetch('http://localhost:8080/users', {
+          method: 'GET',
+          body: JSON.stringify(user),
+          headers: {
+            'content-type': 'application/json'
+          }
+        })
+        .then(data => data.json())
+      }
+
+
+  export function handleErrors(response) {
+    if (!response.ok) {
+      throw response.json();
+    }
+    return response;
+  }
+
 export default {
   makeTransaction,
   login,
+  createNewUser,
+  handleErrors,
+  updateUserState
 }

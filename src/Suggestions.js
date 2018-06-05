@@ -23,7 +23,7 @@ const Suggestions = ({ companies, onSelect }) => {
     </ul>
 
   ))
-  return <ul style={{ width: '0px', marginLeft: '-80px'}}>{options}</ul>
+  return <ul style={{ alignSelf: 'center', display: 'flex', flexDirection: 'column'}}>{options}</ul>
 }
 
 Suggestions.propTypes = {

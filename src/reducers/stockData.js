@@ -5,11 +5,11 @@ const INITIAL_STATE = {
 
 const stockData = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case 'SELECT_COMPANY':
+    case 'GET_COMPANY_DETAILS_SUCCESS':
       return {
         ...state,
-        details: action.payload.details,
-        chartData: action.payload.chartData
+        details: action.payload.quote,
+        chartData: action.payload.chart
       }
     default:
       return state
