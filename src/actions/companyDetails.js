@@ -10,9 +10,9 @@ export const getCompanyDetailsError = (payload) => ({
   payload
 })
 
-export function getCompanyDetails() {
+export function getCompanyDetails(symbol) {
   return function (dispatch) {
-    return companyDetailsService.getCompanyDetails().then(
+    return companyDetailsService.getCompanyDetails(symbol).then(
       getState => dispatch(getCompanyDetailsSuccess(getState)),
       error => dispatch(getCompanyDetailsError(error))
     );

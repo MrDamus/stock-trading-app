@@ -29,7 +29,7 @@ const App = () => (
 
     {/*TODO: Login Button  */}
           
-      <Route exact path="/" component={HomePage} onEnter={() => console.log('enter')} />
+      <Route exact path="/" component={HomePage} />
       <Route path="/info" component={CompanyInfo} />
       <Route path="/login" component={Login} />
       {/*TODO: Profile Route  */}

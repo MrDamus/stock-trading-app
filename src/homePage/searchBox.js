@@ -4,9 +4,6 @@ import PropTypes from 'prop-types'
 import Suggestions from '../Suggestions'
 import { selectCompany } from '../actions'
 import { getCompanyDetails } from '../actions/companyDetails'
-import { fetchCompaniesData } from '../actions/stockData'
-import CompaniesData from '../reducers/companies'
-import companyDetails from '../actions'
 
 
 class SearchBox extends Component {
@@ -19,8 +16,7 @@ class SearchBox extends Component {
 
   render() {
     const { inputValue } = this.state;
-    const { companies } = this.props;
-    console.log(companies.length, inputValue)
+    const { companies, getCompanyDetails } = this.props;
     const companiesToDisplay = inputValue ? searching(companies, inputValue).slice(0, 5) : []
     return (
         <form style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
@@ -28,13 +24,12 @@ class SearchBox extends Component {
             style={{ alignSelf: 'center' }}
             type="text"
             id="searchInput"
-            // onChange={e => changeInputValue({ inputValue: e.currentTarget.value.toUpperCase().replace(/\W/g, '') })}
             onChange={(e) =>  this.setState({inputValue: e.currentTarget.value.toUpperCase().replace(/\W/g, '')})}
             placeholder="Search for company">
           </input>
           <Suggestions
             companies={companiesToDisplay}
-            onSelect={this.getCompanyDetails}
+            onSelect={getCompanyDetails}
           />
         </form>
       )
@@ -46,12 +41,12 @@ const searching = (companies, inputValue) =>
     name.toLowerCase().match(inputValue.toLowerCase()) ||
     symbol.toLowerCase().match(inputValue.toLowerCase()))
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, { history }) => {
   return {
-    inputValue: (inputValue) => dispatch(this.state(inputValue)),
     selectProfile: (symbol, price) => dispatch(selectCompany(symbol, price)),
-    fetchCompaniesData: () =>  dispatch(fetchCompaniesData()),
-
+    getCompanyDetails: symbol => dispatch(getCompanyDetails(symbol))
+      .then(resp => history.push('/info'))
+      .catch(error => alert('Sorry, something went wrong'))
   }
 }
 

@@ -8,48 +8,12 @@ import PropTypes from 'prop-types'
 import { Button } from "react-bootstrap"
 import SearchBox from './homePage/searchBox'
 
-const ENDPOINT = 'https://api.iextrading.com/1.0/'
-const ENDPOINT_companies = `${ENDPOINT}/ref-data/symbols`
-
 class HomePage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      inputValue: '',
-      query: '',
-      companies: [],
-      price: '',
-      users: []
-    };
-    // this.getCompanyDetails = this.getCompanyDetails.bind(this)
-  }
-
-  // MOVE TO ACTIONS AND MAKE ACTION FOR IT  done?
   componentDidMount() {
     this.props.fetchCompaniesData()
   }
 
-  // TODO: MOVE TO ACTIONS AND MAKE ACTION FOR IT
-  // getCompanyDetails(symbol) {
-  //   fetch(`${ENDPOINT}/stock/${symbol}/batch?types=quote,chart`)
-  //     .then(response => response.json())
-  //     .then(data => this.props.selectProfile({ details: data.quote, chartData: data.chart  }))
-  //     .then(() => this.props.history.push('/info'))
-  //     .catch(e => console.warn('Fetching error:', e));
-  // }
-
-  handleInputChange() {
-    this.setState({
-      // TODO: DO THIS THE SAME WAY AS LOGIN  ???
-      query: this.search.value
-  })}
-
   render() {
-    // const { companies, inputValue } = this.state;
-    // const searching = companies.filter(({ name, symbol }) =>
-    //   name.toLowerCase().match(inputValue.toLowerCase()) ||
-    //   symbol.toLowerCase().match(inputValue.toLowerCase())
-    // )
     return (
       <div className="HomePage" style={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
         <Button
@@ -62,20 +26,7 @@ class HomePage extends Component {
           >
             Login
           </Button>
-          <SearchBox/>
-          {/* TODO: MOVE TO SEPARATE COMPONENT */}
-        {/* <form style={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
-          <input
-            style={{alignSelf: 'center'}}
-            type="text"
-            id="searchInput"
-            onChange={(e) =>  this.setState({inputValue: e.currentTarget.value.toUpperCase().replace(/\W/g, '')})}
-            placeholder="Search for company">
-          </input>
-          <Suggestions companies={inputValue ? searching.slice(0, 5) : []}
-            onSelect={this.getCompanyDetails}
-          />
-        </form> */}
+          <SearchBox history={this.props.history} />
       </div>
     );
   }
