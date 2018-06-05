@@ -173,10 +173,10 @@ export function clearDatabase(e) {
 //   return response;
 // }
 
-export function getCompanyDetails(symbol) {
-  fetch(`${'https://api.iextrading.com/1.0/'}/stock/${symbol}/batch?types=quote,chart`)
-    .then(response => response.json())
-    .then(data => this.props.selectProfile({ details: data.quote, chartData: data.chart  }))
-    .then(() => this.props.history.push('/info'))
-    .catch(e => console.warn('Fetching error:', e));
-}
+// export function getCompanyDetails(symbol) {
+//   fetch(`${'https://api.iextrading.com/1.0/'}/stock/${symbol}/batch?types=quote,chart`)
+//     .then(response => response.json())
+//     .then(data => this.props.selectProfile({ details: data.quote, chartData: data.chart  }))
+//     .then(() => this.props.history.push('/info'))
+//     .catch(e => console.warn('Fetching error:', e));
+// }
