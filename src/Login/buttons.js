@@ -2,7 +2,8 @@ import React from 'react';
 import { Button } from "react-bootstrap";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { login, createNewUser, clearDatabase } from '../actions'
+import { login, createNewUser } from '../actions/loginForm'
+import { clearDatabase } from '../actions'
 
 const Buttons = ({ login, createNewUser, clearDatabase, isInputValid }) => (
   <div style={{ display: 'flex', flexDirection: 'column' }}>

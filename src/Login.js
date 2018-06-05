@@ -3,7 +3,7 @@ import './App.css';
 import { FormGroup, FormControl, ControlLabel, InputGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { inputName, inputEmail, inputPassword } from './actions/index'
+import { inputName, inputEmail, inputPassword } from './actions/loginForm'
 import Buttons from './Login/buttons'
 import LoginForm from './Login/loginForm'
 
