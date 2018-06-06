@@ -44,7 +44,7 @@ CompanyInfo.propTypes = {
 };
 
 CompanyInfo.defaultProps = {
-  price: '0',
+  price: 0,
   symbol: 'company symbol',
   companyName: 'company name',
   chart: {}

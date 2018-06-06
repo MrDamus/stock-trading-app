@@ -56,8 +56,8 @@ StockAmountPicker.propTypes = {
 };
 
 StockAmountPicker.defaultProps = {
-  amount: '0',
-  price: '0',
+  amount: 0,
+  price: 0,
   selectValue: () => null,
   buyStock: () => null,
 }

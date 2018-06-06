@@ -55,17 +55,9 @@ const mapStateToProps = ({ companies }) => ({
 })
 
 SearchBox.propTypes = {
-  amount: PropTypes.number,
-  price: PropTypes.number,
-  selectValue: PropTypes.func,
-  buyStock: PropTypes.func,
+  companies: PropTypes.array.isRequired,
+  getCompanyDetails: PropTypes.func.isRequired,
 };
 
-SearchBox.defaultProps = {
-  amount: '0',
-  price: '0',
-  selectValue: () => null,
-  buyStock: () => null,
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBox);
