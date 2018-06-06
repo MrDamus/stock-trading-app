@@ -1,10 +1,7 @@
-function makeTransaction(email, transactionDetails, money) {
-   return fetch(`http://localhost:8080/users/${email}`, {
+function makeTransaction(email, transactionDetails, type) {
+   return fetch(`http://localhost:8080/users/${type}/${email}`, {
         method: 'PUT',
-        body: JSON.stringify({
-          wallet: transactionDetails,
-          money
-        }),
+        body: JSON.stringify(transactionDetails),
         headers: {
           'content-type': 'application/json'
         },

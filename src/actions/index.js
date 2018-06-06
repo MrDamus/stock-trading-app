@@ -49,7 +49,7 @@ export function buyStock() {
       date: Date.now()
     }
 
-    return userService.makeTransaction(user.email, transactionDetails).then(
+    return userService.makeTransaction(user.email, transactionDetails, 'buy').then(
       getState => dispatch(buyStockSuccess(getState)),
       error => dispatch(buyStockError(error))
     );
@@ -69,7 +69,7 @@ export function sellStock() {
       date: Date.now()
     }
     
-    return userService.makeTransaction(user.email, transactionDetails).then(
+    return userService.makeTransaction(user.email, transactionDetails, 'sell').then(
       getState => dispatch(sellStockSuccess(getState)),
       error => dispatch(sellStockError(error))
     );
