@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import StockAmountPicker from './companyInfo/stockAmountPicker'
+import Chart from './companyInfo/chart'
 
 const CompanyInfo = ({ price, symbol, companyName, chart }) => (
   <div className="CompanyInfo"
@@ -11,18 +11,7 @@ const CompanyInfo = ({ price, symbol, companyName, chart }) => (
     <p style={{ alignSelf: 'center' }}>
       {`Latest price of ${symbol} ${companyName} is ${price}`}
     </p>
-    <LineChart width={730} height={250} data={chart}
-      // margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-      style={{ alignSelf: 'center' }}
-    >
-      <CartesianGrid strokeDasharray="5 5" />
-      <XAxis dataKey="date" />
-      <YAxis dataKey="open" />
-      <Tooltip />
-      <Legend />
-      <Line type="monotone" dataKey="open" stroke="#8884d8" />
-      <Line type="monotone" dataKey="close" stroke="#8884d8" />
-    </LineChart>
+    <Chart data={chart}/>
     <div>
       <StockAmountPicker price={price}/>
     </div>
