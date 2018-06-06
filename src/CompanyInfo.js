@@ -5,13 +5,13 @@ import PropTypes from 'prop-types';
 import StockAmountPicker from './companyInfo/stockAmountPicker'
 import Chart from './companyInfo/chart'
 
-const CompanyInfo = ({ price, symbol, companyName }) => (
+const CompanyInfo = ({ price, symbol, companyName, chart }) => (
   <div className="CompanyInfo"
     style={{ display: 'flex', flexDirection: 'column' }}>
     <p style={{ alignSelf: 'center' }}>
       {`Latest price of ${symbol} ${companyName} is ${price}`}
     </p>
-    <Chart/>
+    <Chart data={chart}/>
     <div>
       <StockAmountPicker price={price}/>
     </div>
