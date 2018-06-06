@@ -10,28 +10,6 @@ import GoogleShareButton from './profile/socialMediaButtons/googleShareButton'
 import TransactionHistory from './profile/transactionHistory'
 import Wallet from './profile/wallet'
 
-// To it's own file          DONE
-// const stocks = (data) =>
-//   (<div key={data.date} style={{ display: "flex", justifyContent: "space-around" }}>
-//     <p>
-//       {`You own: ${data.amount}
-//    stock of ${data.symbol} ${data.companyName}
-//    company bought on ${moment(data.date).format('MMM DD h:mm A')}
-//    for ${data.price}$`}
-//     </p>
-//     <p>
-//       <Button
-//         bsSize="small"
-//         bsStyle="warning"
-//         // type="submit"
-//         onClick={sellStock}
-//       >
-//         Sell
-//   </Button>
-//     </p>
-//   </div>
-//   )
-
   // To it's own file         DONE
 // const transactionHistory = (data) =>
 //   (<div key={data.date}>
@@ -41,51 +19,13 @@ import Wallet from './profile/wallet'
 //   </div>)
 
 class Profile extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      companies: [],
-      price: '',
-      user: {
-        name: "",
-        email: "",
-        password: "",
-        wallet: [],
-        money: 1000
-      },
-    };
-  }
-
-  // To redux already done?
-  // updateUserState(user) {
-  //   return fetch('http://localhost:8080/users', {
-  //     method: 'GET',
-  //     body: JSON.stringify(user),
-  //     headers: {
-  //       'content-type': 'application/json'
-  //     },
-  //   })
-  //     .then(data => this.setState({ user: data.user.name }))
-  //     .then(data => this.setState({ user: data.user.email }))
-  //     .then(data => this.setState({ user: data.user.wallet }))
-  //     .catch(e => console.warn(e))
-  // }
-
   render() {
     return (
       <div className="Profile" style={{ width: '100%' }}>
-        {`
-          E-mail: ${this.props.user.email} 
-          Profile name: ${this.props.user.name}
-          Money: ${this.props.user.money}
-        `}
-        <Wallet/>
-        {/* <div className="wallet">
-          <h3>Wallet</h3>
-          <ul>
-            {this.props.user.wallet.map(stocks)}
-          </ul>
-        </div> */}
+        <p>E-mail: {this.props.user.email}</p>
+        <p>Profile name: {this.props.user.name}</p>
+        <p>Money: {this.props.user.money}</p>
+        <Wallet data={this.props.user.wallet}/>
         <TransactionHistory/>
         {/* <div className="transactionHistory">
           <h3>Transaction History</h3>
