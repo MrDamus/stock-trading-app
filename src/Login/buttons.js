@@ -70,4 +70,8 @@ Buttons.propTypes = {
   isInputValid: PropTypes.bool
 };
 
+Buttons.defaultProps = {
+  isInputValid: false
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(Buttons);
