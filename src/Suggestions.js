@@ -10,7 +10,8 @@ const popoverHoverFocus = (
 
 const Suggestions = ({ companies, onSelect }) => {
   const options = companies.map(company => (
-    <ul 
+    <div
+    style={{ alignSelf: 'center' }}
       onClick={() => onSelect(company.symbol)} 
       key={company.symbol}>
       <OverlayTrigger
@@ -20,10 +21,10 @@ const Suggestions = ({ companies, onSelect }) => {
         >
         <Button>{`${company.symbol}: ${company.name}`}</Button>
       </OverlayTrigger>
-    </ul>
+    </div>
 
   ))
-  return <ul style={{ alignSelf: 'center', display: 'flex', flexDirection: 'column'}}>{options}</ul>
+  return <div style={{ alignSelf: 'center', display: 'flex', flexDirection: 'column'}}>{options}</div>
 }
 
 Suggestions.propTypes = {
