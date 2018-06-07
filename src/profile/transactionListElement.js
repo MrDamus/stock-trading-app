@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { sellStock } from '../actions';
+import { sellStock } from '../actions/makeTransaction';
 import { Button } from 'react-bootstrap';
+import { connect } from 'react-redux'
 
-const transactionListElement = ({ data }) => (
+const transactionListElement = ({ data, sell }) => (
 <div key={data.date} style={{ display: "flex", justifyContent: "space-around" }}>
   <p>
     {`You own: ${data.amount}
@@ -17,7 +18,7 @@ const transactionListElement = ({ data }) => (
       bsSize="small"
       bsStyle="warning"
       // type="submit"
-      onClick={sellStock}
+      onClick={() => sell(data.date)}
     >
       Sell
     </Button>
@@ -25,8 +26,14 @@ const transactionListElement = ({ data }) => (
 </div>
 )
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    sell: (id) => dispatch(sellStock(id)),
+  }
+}
+
 transactionListElement.propTypes = {
   data: PropTypes.object.isRequired
 }
 
-export default transactionListElement;
+export default connect(null, mapDispatchToProps)(transactionListElement);

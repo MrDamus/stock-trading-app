@@ -2,7 +2,8 @@ import React from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { selectValue, buyStock } from '../actions'
+import { selectValue } from '../actions'
+import { buyStock } from '../actions/makeTransaction'
 
 const StockAmountPicker = ({ price, selectValue, buyStock, amount }) => (
   <FormGroup controlId="howMany" bsSize="large" style={{ display: 'flex', flexDirection: 'column' }} >
