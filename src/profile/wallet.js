@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import TransactionListElement from './transactionListElement.js'
 
@@ -12,14 +11,8 @@ const Wallet = ({ data }) => (
 </div>
 )
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    // selectValue: (user) => dispatch(selectValue(user)),
-  }
-}
-
 Wallet.propTypes = {
   data: PropTypes.array.isRequired
 }
 
-export default connect(null, mapDispatchToProps)(Wallet);
+export default Wallet;
