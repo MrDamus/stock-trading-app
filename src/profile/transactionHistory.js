@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 TransactionHistory.propTypes = {
-  
+  data: PropTypes.array
 };
 
 

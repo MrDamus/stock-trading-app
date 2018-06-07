@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { sellStock } from '../actions';
@@ -25,5 +24,9 @@ const transactionListElement = ({ data }) => (
   </p>
 </div>
 )
+
+transactionListElement.propTypes = {
+  data: PropTypes.object.isRequired
+}
 
 export default transactionListElement;

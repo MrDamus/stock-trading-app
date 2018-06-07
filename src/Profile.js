@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import moment from 'moment';
-import { Button } from 'react-bootstrap';
 import { sellStock } from './actions';
 import FacebookShareButton from './profile/socialMediaButtons/facebookShareButton'
 import TwitterShareButton from './profile/socialMediaButtons/twitterShareButton'
