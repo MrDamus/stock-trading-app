@@ -16,9 +16,11 @@ export const inputValue = (payload) => ({
 const serverUrl = 'http://localhost:8080/users/'
 
 export function clearDatabase(e) {
-  fetch(serverUrl, {
-    method: 'DELETE',
-    body: e,
-  })
-  console.log('All records from database has been cleared.')
+  return function () {
+    fetch(serverUrl, {
+      method: 'DELETE',
+      body: e,
+    })
+    console.log('All records from database has been cleared.')
+  }
 }
