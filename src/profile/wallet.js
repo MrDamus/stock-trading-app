@@ -6,7 +6,7 @@ const Wallet = ({ data }) => (
 <div className='wallet' key={data.date}>
   <h3>Wallet</h3>
   <ul style={{ display: "flex", flexDirection: "column" }}>
-    {data.map(transaction => <TransactionListElement key={data.date} data={transaction} /> )}
+    {data.map((transaction, i) => <TransactionListElement key={`${data.date}:${i}`} data={transaction} /> )}
   </ul>
 </div>
 )
