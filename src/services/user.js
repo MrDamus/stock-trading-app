@@ -1,5 +1,5 @@
-function makeTransaction(email, transactionDetails, type) {
-   return fetch(`http://localhost:8080/users/${type}/${email}`, {
+function buyStockTransaction(email, transactionDetails) {
+   return fetch(`http://localhost:8080/users/buy/${email}`, {
         method: 'PUT',
         body: JSON.stringify(transactionDetails),
         headers: {
@@ -8,6 +8,17 @@ function makeTransaction(email, transactionDetails, type) {
     })
     .then(data => data.json())
   }
+
+  function sellStockTransaction(email, transactionDetails) {
+    return fetch(`http://localhost:8080/users/sell/${email}`, {
+         method: 'PUT',
+         body: JSON.stringify({ date: transactionDetails}),
+         headers: {
+           'content-type': 'application/json'
+         },
+     })
+     .then(data => data.json())
+   }
 
   function login(email, password) {
     return fetch(`http://localhost:8080/users/${email}`, {
@@ -52,7 +63,8 @@ function makeTransaction(email, transactionDetails, type) {
   }
 
 export default {
-  makeTransaction,
+  buyStockTransaction,
+  sellStockTransaction,
   login,
   createNewUser,
   handleErrors,

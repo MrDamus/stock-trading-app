@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { sellStock } from './actions';
+import { sellStock } from './actions/makeTransaction';
 import FacebookShareButton from './profile/socialMediaButtons/facebookShareButton'
 import TwitterShareButton from './profile/socialMediaButtons/twitterShareButton'
 import GoogleShareButton from './profile/socialMediaButtons/googleShareButton'
