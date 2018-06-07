@@ -22,9 +22,10 @@ const INITIAL_STATE = {
   {
       "symbol": "AAPL",
       "companyName": "Apple Inc.",
-      "amount": "23",
+      "amount": "0",
       "price": 188.58,
-      "date": 1527593220698
+      "date": 1527593220698,
+      "sold": true
   }
 ],
 "money": 500
