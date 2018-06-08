@@ -1,4 +1,6 @@
 import userService from "../services/user";
+import { login } from "./loginForm";
+// import { history } from 'react-router';
 
 export const buyStockSuccess = (payload) => ({
   type: 'BUY_STOCK_SUCCESS',
@@ -34,17 +36,30 @@ export function buyStock() {
       date: Date.now()
     }
 
-    return userService.buyStockTransaction(user.email, transactionDetails).then(
+    return userService.buyStockTransaction(user.email, transactionDetails)
+    .then(data => {
+      dispatch(login(getState))
+      return data
+    })
+    .then(
       getState => dispatch(buyStockSuccess(getState)),
       error => dispatch(buyStockError(error))
-    );
+    )
+    // .then(
+    //   () => history.push('/login')
+    // );
   };
 }
 
 export function sellStock(transactionId) {
   return function (dispatch, getState) {
     const { user } = getState().userData;
-    return userService.sellStockTransaction(user.email, transactionId).then(
+    return userService.sellStockTransaction(user.email, transactionId)
+    .then(data => {
+      dispatch(login(getState))
+      return data
+    })
+    .then(
       getState => dispatch(sellStockSuccess(getState)),
       error => dispatch(sellStockError(error))
     );

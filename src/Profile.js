@@ -8,14 +8,6 @@ import GoogleShareButton from './profile/socialMediaButtons/googleShareButton'
 import TransactionHistory from './profile/transactionHistory'
 import Wallet from './profile/wallet'
 
-  // To it's own file         DONE
-// const transactionHistory = (data) =>
-//   (<div key={data.date}>
-//     <p key={data.date}>
-//       {`You sold: ${data.amount} stocks of ${data.symbol} ${data.companyName} on ${moment(data.date).format('MMM DD h:mm A')} for ${data.price}$ earning: `}
-//     </p>
-//   </div>)
-
 class Profile extends Component {
   render() {
     return (
@@ -23,14 +15,8 @@ class Profile extends Component {
         <p>E-mail: {this.props.user.email}</p>
         <p>Profile name: {this.props.user.name}</p>
         <p>Money: {this.props.user.money}</p>
-        <Wallet data={this.props.user.wallet}/>
-        <TransactionHistory/>
-        {/* <div className="transactionHistory">
-          <h3>Transaction History</h3>
-          <ul>
-            {this.props.user.wallet.map(transactionHistory)}
-          </ul>
-        </div> */}
+        <Wallet data={this.props.user.wallet.filter(transaction => transaction.amount > 0)}/>
+        <TransactionHistory data={this.props.user.wallet.filter(transaction => transaction.sold)} />
         <div className="socialMediaButtons">
           <FacebookShareButton />
           <TwitterShareButton />
