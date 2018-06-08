@@ -1,5 +1,6 @@
 import userService from "../services/user";
 import { login } from "./loginForm";
+// import { history } from 'react-router';
 
 export const buyStockSuccess = (payload) => ({
   type: 'BUY_STOCK_SUCCESS',
@@ -43,7 +44,10 @@ export function buyStock() {
     .then(
       getState => dispatch(buyStockSuccess(getState)),
       error => dispatch(buyStockError(error))
-    );
+    )
+    // .then(
+    //   () => history.push('/login')
+    // );
   };
 }
 
