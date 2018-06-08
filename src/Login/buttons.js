@@ -58,6 +58,7 @@ const mapDispatchToProps = (dispatch, { history }) => {
       .then(resp => history.push('/profile'))
       .catch(error => alert('Sorry, something went wrong'))
     ,
+    // updateUserDetails: () => dispatch(login())
     createNewUser: () => dispatch(createNewUser()),
     clearDatabase: () => dispatch(clearDatabase()),
   }
