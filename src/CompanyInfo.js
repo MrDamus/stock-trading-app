@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import StockAmountPicker from './companyInfo/stockAmountPicker'
 import Chart from './companyInfo/chart'
+import SearchBox from './homePage/searchBox'
 
-const CompanyInfo = ({ price, symbol, companyName, chart }) => (
+const CompanyInfo = ({ price, symbol, companyName, chart, history }) => (
   <div className="CompanyInfo"
     style={{ display: 'flex', flexDirection: 'column' }}>
+    <SearchBox history={history} />
     <p style={{ alignSelf: 'center' }}>
       {`Latest price of ${symbol} ${companyName} is ${price}`}
     </p>
