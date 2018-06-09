@@ -6,25 +6,27 @@ import StockAmountPicker from './companyInfo/stockAmountPicker'
 import Chart from './companyInfo/chart'
 import SearchBox from './homePage/searchBox'
 
-const CompanyInfo = ({ price, symbol, companyName, chart, history }) => (
+const CompanyInfo = ({ price, symbol, companyName, chart, history, user }) => (
   <div className="CompanyInfo"
     style={{ display: 'flex', flexDirection: 'column' }}>
+    <p>Current money: {user.money}</p>
     <SearchBox history={history} />
     <p style={{ alignSelf: 'center' }}>
       {`Latest price of ${symbol} ${companyName} is ${price}`}
     </p>
     <Chart data={chart}/>
     <div>
-      <StockAmountPicker price={price}/>
+      <StockAmountPicker price={price} history={history} />
     </div>
   </div>
 );
 
-const mapStateToProps = ({stockData}) => ({
+const mapStateToProps = ({stockData, userData}) => ({
   price: stockData.details.latestPrice,
   symbol: stockData.details.symbol,
   companyName: stockData.details.companyName,
-  chart: stockData.chartData
+  chart: stockData.chartData,
+  user: userData.user,
 })
 
 CompanyInfo.propTypes = {

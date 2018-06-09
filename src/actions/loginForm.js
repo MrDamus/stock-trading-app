@@ -38,6 +38,7 @@ export const createNewUserError = (payload) => ({
 export function login() {
   return function (dispatch, getState) {
     const user  = getState().loginForm;
+    console.log(user)
     return userService.login(user.email, user.password).then(
       getState => dispatch(loginSuccess(getState)) ,
       error => {
