@@ -1,6 +1,5 @@
 import userService from "../services/user";
 import { login } from "./loginForm";
-// import { history } from 'react-router';
 
 export const buyStockSuccess = (payload) => ({
   type: 'BUY_STOCK_SUCCESS',
@@ -8,7 +7,6 @@ export const buyStockSuccess = (payload) => ({
 })
 
 export const buyStockError = (payload) => {
-  console.log(payload)
   return {
   type: 'BUY_STOCK_ERROR',
   payload
@@ -21,7 +19,6 @@ export const sellStockSuccess = (payload) => ({
 })
 
 export const sellStockError = (payload) => {
-  console.log(payload)
   return {
   type: 'SELL_STOCK_ERROR',
   payload
