@@ -21,7 +21,6 @@ const StockAmountPicker = ({ price, selectValue, buyStock, amount, money }) => (
     />
     <p style={{ alignSelf: 'center' }}>price: {price}</p>
     <p style={{ alignSelf: 'center' }}>This will cost: {cost(amount, price)}</p>
-    <p style={{ alignSelf: 'center' }}>Your current money: {money}</p>
     <div style={{ alignSelf: 'center' }}>
       <Button
         block
@@ -44,7 +43,7 @@ const mapDispatchToProps = (dispatch, { history }) => {
     selectValue: (user) => dispatch(selectValue(user)),
     buyStock: () => dispatch(buyStock())
     .then(resp => history.push('/profile'))
-    .catch(error => alert('Sorry, transaction failed.'))
+    .catch(error => alert(error))
   }
 }
 

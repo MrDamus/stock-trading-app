@@ -7,20 +7,25 @@ export const buyStockSuccess = (payload) => ({
   payload
 })
 
-export const buyStockError = (payload) => ({
+export const buyStockError = (payload) => {
+  console.log(payload)
+  return {
   type: 'BUY_STOCK_ERROR',
   payload
-})
+}
+}
 
 export const sellStockSuccess = (payload) => ({
   type: 'SELL_STOCK_SUCCESS',
   payload
 })
 
-export const sellStockError = (payload) => ({
+export const sellStockError = (payload) => {
+  console.log(payload)
+  return {
   type: 'SELL_STOCK_ERROR',
   payload
-})
+}}
 
 export function buyStock() {
   return function (dispatch, getState) {
@@ -38,16 +43,13 @@ export function buyStock() {
 
     return userService.buyStockTransaction(user.email, transactionDetails)
     .then(data => {
-      dispatch(login(getState))
+      dispatch(login())
       return data
     })
     .then(
       getState => dispatch(buyStockSuccess(getState)),
       error => dispatch(buyStockError(error))
     )
-    // .then(
-    //   () => history.push('/login')
-    // );
   };
 }
 
@@ -56,7 +58,7 @@ export function sellStock(transactionId) {
     const { user } = getState().userData;
     return userService.sellStockTransaction(user.email, transactionId)
     .then(data => {
-      dispatch(login(getState))
+      dispatch(login())
       return data
     })
     .then(
