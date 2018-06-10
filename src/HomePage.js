@@ -8,13 +8,7 @@ import PropTypes from 'prop-types'
 import { Button } from "react-bootstrap"
 import SearchBox from './homePage/searchBox'
 
-class HomePage extends Component {
-  componentDidMount() {
-    this.props.fetchCompaniesData()
-  }
-
-  render() {
-    return (
+const HomePage = ({ history }) => (
       <div className="HomePage" style={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
         <Button
             style={{alignSelf: 'flex-end', maxWidth: '100px', marginBottom: '30px'}}
@@ -22,15 +16,13 @@ class HomePage extends Component {
             bsSize="small"
             bsStyle="success"
             type="submit"
-            onClick={() => this.props.history.push('/login')}
+            onClick={() => history.push('/login')}
           >
             Login
           </Button>
-          <SearchBox history={this.props.history} />
+          <SearchBox history={history} />
       </div>
     );
-  }
-}
 
 const mapDispatchToProps = (dispatch) => {
   return {

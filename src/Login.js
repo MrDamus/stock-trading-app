@@ -12,7 +12,7 @@ const Login = ({inputName, inputEmail, inputPassword, name, email, password, his
           <FormInput name="name" inputValue={name} onChange={(event) => inputName(event.target.value)} />
           <FormInput name="email" inputValue={email} onChange={(event) => inputEmail(event.target.value)} />
           <FormInput name="password" inputValue={password} onChange={(event) => inputPassword(event.target.value)} />
-          <Buttons history={history} />
+          <Buttons history={history}/>
         </form>
       </div>
     );
