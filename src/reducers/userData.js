@@ -39,6 +39,11 @@ const userData = (state = INITIAL_STATE, action) => {
         ...state,
         user: action.payload
       }
+    case 'CREATE_NEW_USER_SUCCESS':
+    return {
+      ...state,
+      user: action.payload
+    }
     default:
       return state
   }

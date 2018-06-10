@@ -12,7 +12,7 @@ const Buttons = ({ login, createNewUser, clearDatabase, isInputValid }) => (
         block
         bsSize="large"
         bsStyle="success"
-        // disabled={!isInputValid}
+        disabled={!isInputValid}
         type="submit"
         onClick={login}
       >
@@ -24,7 +24,7 @@ const Buttons = ({ login, createNewUser, clearDatabase, isInputValid }) => (
         block
         bsSize="large"
         bsStyle="primary"
-        // disabled={isInputValid}
+        disabled={!isInputValid}
         type="submit"
         onClick={createNewUser}
       >
@@ -59,7 +59,10 @@ const mapDispatchToProps = (dispatch, { history }) => {
       .catch(error => alert('Sorry, something went wrong'))
     ,
     updateUserDetails: () => dispatch(login()),
-    createNewUser: () => dispatch(createNewUser()),
+    createNewUser: () => dispatch(createNewUser())
+    .then(resp => history.push('/profile'))
+    .catch(error => alert('Sorry, user already exists'))
+    ,
     clearDatabase: () => dispatch(clearDatabase()),
   }
 }
