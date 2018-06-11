@@ -14,7 +14,7 @@ const CompanyInfo = ({ price, symbol, companyName, sector, latestUpdate, openTim
     <p style={{ alignSelf: 'center' }}>
       Current money: {user.money}</p>
     <SearchBox history={history} />
-    <p style={{ alignSelf: 'center' }}>
+      <p style={{ alignSelf: 'center' }}>
       {`${symbol} ${companyName}`}
       </p>
       <p style={{ alignSelf: 'center' }}>
@@ -31,9 +31,9 @@ const CompanyInfo = ({ price, symbol, companyName, sector, latestUpdate, openTim
       </p>
       <p style={{ alignSelf: 'center' }}>
       {`Closing time: ${moment(closeTime).format('MMM DD h:mm A')}`}
-    </p>
+      </p>
     <Chart data={chart}/>
-      <StockAmountPicker price={price} history={history} />
+    <StockAmountPicker price={price} history={history} />
   </div>
 );
 
@@ -55,7 +55,11 @@ CompanyInfo.propTypes = {
   companyName: PropTypes.string.isRequired,
   chart: PropTypes.array.isRequired,
   history: PropTypes.array.isRequired,
-  user: PropTypes.array.isRequired
+  user: PropTypes.array.isRequired,
+  sector: PropTypes.array.isRequired,
+  latestUpdate: PropTypes.array.isRequired,
+  openTime: PropTypes.array.isRequired,
+  closeTime: PropTypes.array.isRequired
 };
 
 CompanyInfo.defaultProps = {
