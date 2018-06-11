@@ -11,6 +11,11 @@ const stockData = (state = INITIAL_STATE, action) => {
         details: action.payload.quote,
         chartData: action.payload.chart
       }
+    case 'GET_COMPANY_CHART_SUCCESS':
+    return {
+      ...state,
+      chartData: action.payload
+    }
     default:
       return state
   }

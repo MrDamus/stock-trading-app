@@ -14,7 +14,7 @@ export function getCompanyChart(symbol, periodOfTime) {
   return function (dispatch) {
     return companyChartService.getCompanyChart(symbol, periodOfTime)
     .then(
-      getState => dispatch(getCompanyChartSuccess(getState)),
+      chart => dispatch(getCompanyChartSuccess(chart)),
       error => dispatch(getCompanyChartError(error))
     );
   };

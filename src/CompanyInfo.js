@@ -35,12 +35,12 @@ const CompanyInfo = ({ price, symbol, companyName, sector, latestUpdate, openTim
       </p>
     <div style= {{display: 'flex', justifyContent: 'center'}}>
       <Button
-        onClick={getCompanyChart}
+        onClick={() => getCompanyChart(symbol, '1m')}
       >
         Last month
       </Button>
       <Button
-        onClick={getCompanyChart}
+        onClick={() => getCompanyChart(symbol, '3m')}
       >
         Last 3 months
       </Button>
@@ -53,12 +53,11 @@ const CompanyInfo = ({ price, symbol, companyName, sector, latestUpdate, openTim
 const mapDispatchToProps = (dispatch) => {
   return {
     getCompanyChart: (symbol, periodOfTime) => dispatch(getCompanyChart(symbol, periodOfTime))
-      // .then(resp => history.push('/info'))
       .catch(error => alert('Sorry, something went wrong'))
   }
 }
 
-const mapStateToProps = ({stockData, userData, companyChart}) => ({
+const mapStateToProps = ({stockData, userData}) => ({
   price: stockData.details.latestPrice,
   symbol: stockData.details.symbol,
   companyName: stockData.details.companyName,
@@ -68,7 +67,6 @@ const mapStateToProps = ({stockData, userData, companyChart}) => ({
   latestUpdate: stockData.details.latestUpdate,
   openTime: stockData.details.openTime,
   closeTime: stockData.details.closeTime,
-  // companyChart: companyChart.chart
 })
 
 CompanyInfo.propTypes = {
