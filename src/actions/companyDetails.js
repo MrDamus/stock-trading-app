@@ -12,7 +12,8 @@ export const getCompanyDetailsError = (payload) => ({
 
 export function getCompanyDetails(symbol) {
   return function (dispatch) {
-    return companyDetailsService.getCompanyDetails(symbol).then(
+    return companyDetailsService.getCompanyDetails(symbol)
+    .then(
       getState => dispatch(getCompanyDetailsSuccess(getState)),
       error => dispatch(getCompanyDetailsError(error))
     );
