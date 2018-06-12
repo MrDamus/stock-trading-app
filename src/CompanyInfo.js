@@ -106,9 +106,9 @@ CompanyInfo.propTypes = {
   chart: PropTypes.array.isRequired,
   history: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
-  sector: PropTypes.array.isRequired,
-  latestUpdate: PropTypes.array.isRequired,
-  openTime: PropTypes.array.isRequired,
+  sector: PropTypes.string.isRequired,
+  latestUpdate: PropTypes.number.isRequired,
+  openTime: PropTypes.number.isRequired,
   closeTime: PropTypes.number.isRequired
 };
 
@@ -119,9 +119,9 @@ CompanyInfo.defaultProps = {
   chart: {},
   history: {},
   user: {},
-  sector: [],
-  latestUpdate: [],
-  openTime: [],
+  sector: '',
+  latestUpdate: 0,
+  openTime: 0,
   closeTime: 0
 }
 
