@@ -8,8 +8,9 @@ import SearchBox from './homePage/searchBox'
 import moment from 'moment'
 import { Button } from "react-bootstrap";
 import {getCompanyChart} from './actions/companyChart'
+import { getCompanyFinances } from './actions/companyFinances';
 
-const CompanyInfo = ({ price, symbol, companyName, sector, latestUpdate, openTime, closeTime, chart, history, user, getCompanyChart }) => (
+const CompanyInfo = ({ price, symbol, companyName, sector, latestUpdate, openTime, closeTime, chart, history, user, getCompanyChart, getCompanyFinances }) => (
   <div className="CompanyInfo"
     style={{ display: 'flex', flexDirection: 'column' }}>
     <p style={{ alignSelf: 'center' }}>
@@ -24,6 +25,12 @@ const CompanyInfo = ({ price, symbol, companyName, sector, latestUpdate, openTim
       <p style={{ alignSelf: 'center' }}>
       {`Latest price: ${price}`}
       </p>
+      <Button
+        style={{ alignSelf: 'center' }}
+        onClick={() => getCompanyFinances(symbol)}
+      >
+        Show financial information
+      </Button>
       <p style={{ alignSelf: 'center' }}>
       {`Latest update: ${moment(latestUpdate).format('MMM DD h:mm A')}`}
       </p>
@@ -84,6 +91,11 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getCompanyChart: (symbol, periodOfTime) => dispatch(getCompanyChart(symbol, periodOfTime))
       .catch(error => alert('Sorry, something went wrong'))
+    ,
+    getCompanyFinances: (symbol) => dispatch(getCompanyFinances(symbol))
+      // .then(resp => companyFinancials.push(resp))
+      .catch(error => alert('Sorry, could not load financial information.'))
+    ,
   }
 }
 
@@ -109,7 +121,9 @@ CompanyInfo.propTypes = {
   sector: PropTypes.string.isRequired,
   latestUpdate: PropTypes.number.isRequired,
   openTime: PropTypes.number.isRequired,
-  closeTime: PropTypes.number.isRequired
+  closeTime: PropTypes.number.isRequired,
+  getCompanyChart: PropTypes.func.isRequired,
+  getCompanyFinances: PropTypes.func.isRequired,
 };
 
 CompanyInfo.defaultProps = {
