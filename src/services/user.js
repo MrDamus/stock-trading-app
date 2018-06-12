@@ -12,7 +12,7 @@ function buyStockTransaction(email, transactionDetails) {
   function sellStockTransaction(email, transactionDetails) {
     return fetch(`http://localhost:8080/users/sell/${email}`, {
          method: 'PUT',
-         body: JSON.stringify({ date: transactionDetails}),
+         body: JSON.stringify({ date: transactionDetails, amount: 1 }),
          headers: {
            'content-type': 'application/json'
          },
