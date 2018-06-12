@@ -35,6 +35,11 @@ const CompanyInfo = ({ price, symbol, companyName, sector, latestUpdate, openTim
       </p>
     <div style= {{display: 'flex', justifyContent: 'center'}}>
       <Button
+        onClick={() => getCompanyChart(symbol, '1d')}
+      >
+        Last day
+      </Button>
+      <Button
         onClick={() => getCompanyChart(symbol, '1m')}
       >
         Last month
@@ -43,6 +48,31 @@ const CompanyInfo = ({ price, symbol, companyName, sector, latestUpdate, openTim
         onClick={() => getCompanyChart(symbol, '3m')}
       >
         Last 3 months
+      </Button>
+      <Button
+        onClick={() => getCompanyChart(symbol, '6m')}
+      >
+        Last 6 months
+      </Button>
+      <Button
+        onClick={() => getCompanyChart(symbol, 'ytd')}
+      >
+        This year
+      </Button>
+      <Button
+        onClick={() => getCompanyChart(symbol, '1y')}
+      >
+        Last year
+      </Button>
+      <Button
+        onClick={() => getCompanyChart(symbol, '2y')}
+      >
+        Last 2 years
+      </Button>
+      <Button
+        onClick={() => getCompanyChart(symbol, '5y')}
+      >
+        Last 5 years
       </Button>
     </div>
     <Chart data={chart}/>
@@ -74,12 +104,12 @@ CompanyInfo.propTypes = {
   symbol: PropTypes.string.isRequired,
   companyName: PropTypes.string.isRequired,
   chart: PropTypes.array.isRequired,
-  history: PropTypes.array.isRequired,
-  user: PropTypes.array.isRequired,
-  sector: PropTypes.array.isRequired,
-  latestUpdate: PropTypes.array.isRequired,
-  openTime: PropTypes.array.isRequired,
-  closeTime: PropTypes.array.isRequired
+  history: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  sector: PropTypes.string.isRequired,
+  latestUpdate: PropTypes.number.isRequired,
+  openTime: PropTypes.number.isRequired,
+  closeTime: PropTypes.number.isRequired
 };
 
 CompanyInfo.defaultProps = {
@@ -87,12 +117,12 @@ CompanyInfo.defaultProps = {
   symbol: 'company symbol',
   companyName: 'company name',
   chart: {},
-  history: [],
-  user: [],
-  sector: [],
-  latestUpdate: [],
-  openTime: [],
-  closeTime: []
+  history: {},
+  user: {},
+  sector: '',
+  latestUpdate: 0,
+  openTime: 0,
+  closeTime: 0
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CompanyInfo);

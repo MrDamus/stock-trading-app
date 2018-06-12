@@ -52,14 +52,14 @@ const mapStateToProps = ({ stockPicker }) => ({
 })
 
 StockAmountPicker.propTypes = {
-  amount: PropTypes.number,
+  amount: PropTypes.string,
   price: PropTypes.number,
   selectValue: PropTypes.func,
   buyStock: PropTypes.func,
 };
 
 StockAmountPicker.defaultProps = {
-  amount: 0,
+  amount: 'quantity',
   price: 0,
   selectValue: () => null,
   buyStock: () => null,
