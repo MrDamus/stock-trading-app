@@ -71,11 +71,11 @@ Buttons.propTypes = {
   login: PropTypes.func.isRequired,
   clearDatabase: PropTypes.func.isRequired,
   createNewUser: PropTypes.func.isRequired,
-  isInputValid: PropTypes.bool
+  isInputValid: PropTypes.string
 };
 
 Buttons.defaultProps = {
-  isInputValid: false
+  isInputValid: 'false'
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Buttons);
