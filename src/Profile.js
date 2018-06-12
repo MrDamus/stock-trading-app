@@ -14,7 +14,7 @@ const Profile = ({ user }) => (
         <p>Profile name: {user.name}</p>
         <p>Money: {user.money}</p>
         <Wallet data={user.wallet.filter(transaction => transaction.amount > 0)}/>
-        <TransactionHistory data={user.wallet.filter(transaction => transaction.sold)} />
+        <TransactionHistory data={user.transactionHistory} />
         <div className="socialMediaButtons">
           <FacebookShareButton />
           <TwitterShareButton />
