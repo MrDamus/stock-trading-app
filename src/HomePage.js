@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './App.css'
 import { connect } from 'react-redux'
-// import Suggestions from './Suggestions'
 import { selectCompany } from './actions'
 import { fetchCompaniesData } from './actions/stockData'
 import PropTypes from 'prop-types'
@@ -32,11 +31,13 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 HomePage.propTypes = {
-  selectProfile: PropTypes.func
+  selectProfile: PropTypes.func,
+  history: PropTypes.object
 };
 
 HomePage.defaultProps = {
- selectProfile: {}
+ selectProfile: {},
+ history: {},
 }
 
 export default connect(null, mapDispatchToProps)(HomePage);

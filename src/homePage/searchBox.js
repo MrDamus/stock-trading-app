@@ -5,7 +5,6 @@ import Suggestions from '../Suggestions'
 import { selectCompany } from '../actions'
 import { getCompanyDetails } from '../actions/companyDetails'
 
-
 class SearchBox extends Component {
   constructor(props) {
     super(props);
@@ -21,7 +20,7 @@ class SearchBox extends Component {
     return (
         <form style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
           <input
-            style={{ alignSelf: 'center' }}
+            style={{ alignSelf: 'center', textAlign: 'center' }}
             type="text"
             id="searchInput"
             onChange={(e) =>  this.setState({inputValue: e.currentTarget.value.toUpperCase().replace(/\W/g, '')})}
@@ -58,6 +57,5 @@ SearchBox.propTypes = {
   companies: PropTypes.array.isRequired,
   getCompanyDetails: PropTypes.func.isRequired,
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBox);
