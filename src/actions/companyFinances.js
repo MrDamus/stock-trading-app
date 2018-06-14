@@ -14,7 +14,7 @@ export function getCompanyFinances(symbol) {
   return function (dispatch) {
     return companyFinancesService.getCompanyFinances(symbol)
     .then(
-      finances => dispatch(getCompanyFinancesSuccess(finances)),
+      getState => dispatch(getCompanyFinancesSuccess(getState)),
       error => dispatch(getCompanyFinancesError(error))
     );
   };

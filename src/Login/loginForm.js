@@ -7,6 +7,7 @@ const LoginForm = ({ name, inputValue, onChange }) => (
     <ControlLabel style={{textAlign: 'center'}}>{name} </ControlLabel>
     <InputGroup>
       <FormControl
+        style={{ textAlign: 'center'}}
         autoFocus
         type={name}
         value={inputValue}
