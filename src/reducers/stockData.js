@@ -1,7 +1,8 @@
 const INITIAL_STATE = {
   chartData: [],
   details: [],
-  finances: []
+  finances: [],
+  logo: {}
 }
 
 const stockData = (state = INITIAL_STATE, action) => {
@@ -11,7 +12,8 @@ const stockData = (state = INITIAL_STATE, action) => {
       ...state,
       details: action.payload.quote,
       chartData: action.payload.chart,
-      finances: action.payload.financials.financials
+      finances: action.payload.financials.financials,
+      logo: action.payload.logo
     }
     case 'GET_COMPANY_CHART_SUCCESS':
     return {
