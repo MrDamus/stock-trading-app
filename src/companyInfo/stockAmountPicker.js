@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import { selectValue } from '../actions'
 import { buyStock } from '../actions/makeTransaction'
 
-const StockAmountPicker = ({ price, selectValue, buyStock, amount, money }) => (
-  <FormGroup controlId="howMany" bsSize="large" style={{ display: 'flex', flexDirection: 'column' }} >
+const StockAmountPicker = ({ price, selectValue, buyStock, amount, message }) => ([
+  <FormGroup key="form" controlId="howMany" bsSize="large" style={{ display: 'flex', flexDirection: 'column' }} >
     <ControlLabel style={{ alignSelf: 'center' }}>Amount:</ControlLabel>
     <FormControl
       style={{ width: '25%', alignSelf: 'center' }}
@@ -31,7 +31,9 @@ const StockAmountPicker = ({ price, selectValue, buyStock, amount, money }) => (
         Buy securities
         </Button>
     </div>
-  </FormGroup>
+  </FormGroup>,
+  <p key="message">{message}</p>
+]
 )
 
 const cost = (amount, price) => {
@@ -42,13 +44,13 @@ const mapDispatchToProps = (dispatch, { history }) => {
   return {
     selectValue: (user) => dispatch(selectValue(user)),
     buyStock: () => dispatch(buyStock())
-    .then(resp => history.push('/profile'))
     .catch(error => alert(error))
   }
 }
 
-const mapStateToProps = ({ stockPicker }) => ({
-  amount: stockPicker.amount
+const mapStateToProps = ({ stockPicker, transactions }) => ({
+  amount: stockPicker.amount,
+  message: transactions.message
 })
 
 StockAmountPicker.propTypes = {

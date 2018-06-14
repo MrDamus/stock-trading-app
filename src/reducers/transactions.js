@@ -5,10 +5,11 @@ const INITIAL_STATE = {
 
 const transactions = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case 'SELECT_VALUE':
+    case 'BUY_STOCK_SUCCESS':
       return {
         ...state,
-        inProgress: action.payload
+        message: 'Transaction Successfully',
+        inProgress: false
       }
     default:
       return state
