@@ -45,7 +45,7 @@ const mapDispatchToProps = (dispatch, { history }) => {
     selectProfile: (symbol, price) => dispatch(selectCompany(symbol, price)),
     getCompanyDetails: symbol => dispatch(getCompanyDetails(symbol))
       .then(resp => history.push('/info'))
-      .catch(error => alert('Sorry, something went wrong'))
+      .catch(error => alert('Sorry, something went wrong')),
   }
 }
 

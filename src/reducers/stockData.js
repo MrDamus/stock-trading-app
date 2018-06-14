@@ -10,7 +10,8 @@ const stockData = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       details: action.payload.quote,
-      chartData: action.payload.chart
+      chartData: action.payload.chart,
+      finances: action.payload.financials.financials
     }
     case 'GET_COMPANY_CHART_SUCCESS':
     return {
