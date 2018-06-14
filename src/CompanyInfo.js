@@ -20,7 +20,7 @@ const CompanyInfo = ({ price, symbol, companyName, sector, change, changePercent
       <p style={{ alignSelf: 'center' }}>{`${symbol} ${companyName}`}</p>
       <p style={{ alignSelf: 'center' }}>{`Sector : ${sector}`}</p>
       <p style={{ alignSelf: 'center' }}>{`Last price: ${price}`}</p>
-      <p style={{ alignSelf: 'center', color: change>0 ? 'green' : 'red'}}>{`Change: ${change} (${changePercent}%)`}</p>
+      <p style={{ alignSelf: 'center', color: change > 0 ? 'green' : 'red'}}>{`Change: ${change} (${changePercent}%)`}</p>
       <Button
         style={{ alignSelf: 'center' }}
         onClick={() => getCompanyFinances(symbol)}
@@ -89,7 +89,6 @@ const CompanyInfo = ({ price, symbol, companyName, sector, change, changePercent
 const mapDispatchToProps = (dispatch) => {
   return {
     getCompanyChart: (symbol, periodOfTime) => dispatch(getCompanyChart(symbol, periodOfTime))
-      .catch(error => alert('Sorry, something went wrong'))
     ,
     getCompanyFinances: (symbol) => dispatch(getCompanyFinances(symbol))
       // .then(resp => companyFinancials.push(resp))
@@ -111,7 +110,6 @@ const mapStateToProps = ({stockData, userData}) => ({
   latestUpdate: stockData.details.latestUpdate,
   openTime: stockData.details.openTime,
   closeTime: stockData.details.closeTime,
-  grossProfit: stockData.finances.grossProfit,
 })
 
 CompanyInfo.propTypes = {
