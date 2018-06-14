@@ -11,13 +11,12 @@ import {getCompanyChart} from './actions/companyChart'
 import { getCompanyFinances } from './actions/companyFinances'
 import CompanyFinancialInfo from './companyInfo/companyFinancialInfo'
 
-const CompanyInfo = ({ price, symbol, companyName, sector, change, changePercent, latestUpdate, openTime, closeTime, chart, history, user, getCompanyChart, getCompanyFinances, finances, logo }) => (
+const CompanyInfo = ({ price, symbol, companyName, sector, change, changePercent, latestUpdate, openTime, closeTime, chart, history, user, getCompanyChart, getCompanyFinances, finances }) => (
   <div className="CompanyInfo"
     style={{ display: 'flex', flexDirection: 'column' }}>
     <p style={{ alignSelf: 'center' }}>
       Current money: {user.money}</p>
     <SearchBox history={history} />
-      <img style={{ maxWidth: '200px'}} src={logo.url} />
       <p style={{ alignSelf: 'center' }}>{`${symbol} ${companyName}`}</p>
       <p style={{ alignSelf: 'center' }}>{`Sector : ${sector}`}</p>
       <p style={{ alignSelf: 'center' }}>{`Last price: ${price}`}</p>
@@ -41,7 +40,6 @@ const CompanyInfo = ({ price, symbol, companyName, sector, change, changePercent
       {`Closing time: ${moment(closeTime).format('MMM DD h:mm A')}`}
       </p>
     <div style= {{display: 'flex', justifyContent: 'center'}}>
-      {/* TODO: map buttonsin 1 line */}
       <Button
         onClick={() => getCompanyChart(symbol, '1d')}
       >
@@ -113,7 +111,6 @@ const mapStateToProps = ({stockData, userData}) => ({
   latestUpdate: stockData.details.latestUpdate,
   openTime: stockData.details.openTime,
   closeTime: stockData.details.closeTime,
-  logo: stockData.logo,
   grossProfit: stockData.finances.grossProfit,
 })
 
