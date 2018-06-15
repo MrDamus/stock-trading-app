@@ -10,27 +10,21 @@ import Chart from './companyInfo/chart'
 import {getCompanyChart} from './actions/companyChart'
 import { getCompanyFinances } from './actions/companyFinances'
 import CompanyFinancialInfo from './companyInfo/companyFinancialInfo'
+import Summary from './companyInfo/summary'
 
-const CompanyInfo = ({ price, symbol, companyName, sector, change, changePercent, latestUpdate, openTime, closeTime, chart, history, user, getCompanyChart, getCompanyFinances, finances, logo }) => (
+const CompanyInfo = ({ price, symbol, latestUpdate, openTime, closeTime, chart, history, user, getCompanyChart, getCompanyFinances, finances }) => (
   <div className="CompanyInfo"
     style={{ display: 'flex', flexDirection: 'column' }}>
     <p style={{ alignSelf: 'center' }}>
       Current money: {user.money}</p>
     <SearchBox history={history} />
-      <img style={{ maxWidth: '200px'}} src={logo.url} />
-      <p style={{ alignSelf: 'center' }}>{`${symbol} ${companyName}`}</p>
-      <p style={{ alignSelf: 'center' }}>{`Sector : ${sector}`}</p>
-      <p style={{ alignSelf: 'center' }}>{`Last price: ${price}`}</p>
-      <p style={{ alignSelf: 'center', color: change > 0 ? 'green' : 'red'}}>{`Change: ${change} (${changePercent}%)`}</p>
+    <Summary />
       <Button
         style={{ alignSelf: 'center' }}
         onClick={() => getCompanyFinances(symbol)}
       >
         Show financial information
       </Button>
-      
-      <CompanyFinancialInfo data={finances}/>
-
       <p style={{ alignSelf: 'center' }}>
       {`Latest update: ${moment(latestUpdate).format('MMM DD h:mm A')}`}
       </p>
@@ -40,8 +34,9 @@ const CompanyInfo = ({ price, symbol, companyName, sector, change, changePercent
       <p style={{ alignSelf: 'center' }}>
       {`Closing time: ${moment(closeTime).format('MMM DD h:mm A')}`}
       </p>
+      
+      <CompanyFinancialInfo data={finances}/>
     <div style= {{display: 'flex', justifyContent: 'center'}}>
-      {/* TODO: map buttonsin 1 line */}
       <Button
         onClick={() => getCompanyChart(symbol, '1d')}
       >
@@ -103,43 +98,32 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = ({stockData, userData}) => ({
   price: stockData.details.latestPrice,
   symbol: stockData.details.symbol,
-  companyName: stockData.details.companyName,
   chart: stockData.chartData,
   user: userData.user,
-  sector: stockData.details.sector,
-  change: stockData.details.change,
-  changePercent: stockData.details.changePercent,
   latestUpdate: stockData.details.latestUpdate,
   openTime: stockData.details.openTime,
   closeTime: stockData.details.closeTime,
-  logo: stockData.logo,
 })
 
 CompanyInfo.propTypes = {
   price: PropTypes.any.isRequired,
   symbol: PropTypes.string.isRequired,
-  companyName: PropTypes.string.isRequired,
   chart: PropTypes.array.isRequired,
   history: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
-  sector: PropTypes.string.isRequired,
   latestUpdate: PropTypes.number.isRequired,
   openTime: PropTypes.number.isRequired,
   closeTime: PropTypes.number.isRequired,
   getCompanyChart: PropTypes.func.isRequired,
   getCompanyFinances: PropTypes.func.isRequired,
-  change: PropTypes.number.isRequired,
-  changePercent: PropTypes.number.isRequired,
 };
 
 CompanyInfo.defaultProps = {
   price: 0,
   symbol: '',
-  companyName: '',
   chart: [],
   history: {},
   user: {},
-  sector: '',
   latestUpdate: 0,
   openTime: 0,
   closeTime: 0,
