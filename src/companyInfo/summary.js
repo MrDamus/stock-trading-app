@@ -28,10 +28,6 @@ const mapStateToProps = ({stockData, userData}) => ({
 })
 
 Summary.propTypes = {
-  data: PropTypes.array
-}
-
-Summary.propTypes = {
   price: PropTypes.any.isRequired,
   symbol: PropTypes.string.isRequired,
   companyName: PropTypes.string.isRequired,

@@ -11,6 +11,7 @@ import {getCompanyChart} from './actions/companyChart'
 import { getCompanyFinances } from './actions/companyFinances'
 import CompanyFinancialInfo from './companyInfo/companyFinancialInfo'
 import Summary from './companyInfo/summary'
+import NavBar from './companyInfo/navBar'
 
 const CompanyInfo = ({ price, symbol, latestUpdate, openTime, closeTime, chart, history, user, getCompanyChart, getCompanyFinances, finances }) => (
   <div className="CompanyInfo"
@@ -19,6 +20,7 @@ const CompanyInfo = ({ price, symbol, latestUpdate, openTime, closeTime, chart, 
       Current money: {user.money}</p>
     <SearchBox history={history} />
     <Summary />
+    <NavBar />
       <Button
         style={{ alignSelf: 'center' }}
         onClick={() => getCompanyFinances(symbol)}
