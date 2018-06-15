@@ -12,6 +12,8 @@ import { getCompanyFinances } from './actions/companyFinances'
 import CompanyFinancialInfo from './companyInfo/companyFinancialInfo'
 import Summary from './companyInfo/summary'
 
+const durations = ['1d', '1m', '3m', '6m', 'ytd', '1y', '2y', '5y'];
+
 const CompanyInfo = ({ price, symbol, latestUpdate, openTime, closeTime, chart, history, user, getCompanyChart, getCompanyFinances, finances }) => (
   <div className="CompanyInfo"
     style={{ display: 'flex', flexDirection: 'column' }}>
@@ -37,46 +39,13 @@ const CompanyInfo = ({ price, symbol, latestUpdate, openTime, closeTime, chart, 
       
       <CompanyFinancialInfo data={finances}/>
     <div style= {{display: 'flex', justifyContent: 'center'}}>
-      <Button
-        onClick={() => getCompanyChart(symbol, '1d')}
-      >
-        Last day
-      </Button>
-      <Button
-        onClick={() => getCompanyChart(symbol, '1m')}
-      >
-        Last month
-      </Button>
-      <Button
-        onClick={() => getCompanyChart(symbol, '3m')}
-      >
-        Last 3 months
-      </Button>
-      <Button
-        onClick={() => getCompanyChart(symbol, '6m')}
-      >
-        Last 6 months
-      </Button>
-      <Button
-        onClick={() => getCompanyChart(symbol, 'ytd')}
-      >
-        This year
-      </Button>
-      <Button
-        onClick={() => getCompanyChart(symbol, '1y')}
-      >
-        Last year
-      </Button>
-      <Button
-        onClick={() => getCompanyChart(symbol, '2y')}
-      >
-        Last 2 years
-      </Button>
-      <Button
-        onClick={() => getCompanyChart(symbol, '5y')}
-      >
-        Last 5 years
-      </Button>
+      { durations.map(duration => (
+        <Button
+          key={''}
+          onClick={() => getCompanyChart(symbol, duration)}
+        >
+          {duration.toUpperCase()}
+        </Button>))}
     </div>
     <Chart data={chart}/>
     <StockAmountPicker price={price} history={history} />
