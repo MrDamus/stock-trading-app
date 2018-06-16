@@ -1,7 +1,4 @@
-import store from '../index.js'
-
-function buyStockTransaction(id, transactionDetails) {
-  const { token } = store.getSate()
+function buyStockTransaction(id, transactionDetails, token) {
    return fetch(`http://localhost:8080/v1/transaction/buy/${id}`, {
         method: 'POST',
         body: JSON.stringify(transactionDetails),
@@ -48,11 +45,9 @@ function buyStockTransaction(id, transactionDetails) {
       }
 
 
-  export function updateUserState(user) {
-  const { token } = store.getSate()
+  export function updateUserState(token) {
     return fetch('http://localhost:8080/v1/users/profile', {
       method: 'GET',
-      body: JSON.stringify(user),
       headers: {
         'content-type': 'application/json',
         'Authorization': `${token.tokenType} ${token.accessToken}`
