@@ -27,18 +27,15 @@ export const sellStockError = (payload) => {
 export function buyStock() {
   return function (dispatch, getState) {
     const { details } = getState().stockData;
-    const { user } = getState().userData;
+    const { user, token } = getState().userData;
     const { amount } = getState().stockPicker;
 
     const transactionDetails = {
       symbol: details.symbol,
-      companyName: details.companyName,
       amount: amount,
-      price: details.latestPrice,
-      date: Date.now()
     }
 
-    return userService.buyStockTransaction(user.email, transactionDetails)
+    return userService.buyStockTransaction(user.id, transactionDetails, token)
     .then(data => {
       dispatch(login())
       return data

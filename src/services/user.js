@@ -1,9 +1,10 @@
-function buyStockTransaction(email, transactionDetails) {
-   return fetch(`http://localhost:8080/users/buy/${email}`, {
-        method: 'PUT',
+function buyStockTransaction(id, transactionDetails, token) {
+   return fetch(`http://localhost:8080/v1/transaction/buy/${id}`, {
+        method: 'POST',
         body: JSON.stringify(transactionDetails),
         headers: {
-          'content-type': 'application/json'
+          'content-type': 'application/json',
+          'Authorization': `${token.tokenType} ${token.accessToken}`
         },
     })
     .then(data => data.json())
@@ -21,9 +22,10 @@ function buyStockTransaction(email, transactionDetails) {
    }
 
   function login(email, password) {
-    return fetch(`http://localhost:8080/users/${email}`, {
+    console.log(email, password)
+    return fetch('http://localhost:8080/v1/auth/login', {
       method: 'POST',
-      body: JSON.stringify({ password: password }),
+      body: JSON.stringify({ password, email }),
       headers: {
         'content-type': 'application/json'
       },
@@ -32,7 +34,7 @@ function buyStockTransaction(email, transactionDetails) {
   }
 
   export function createNewUser(user) {
-    return fetch('http://localhost:8080/users/', {
+    return fetch('http://localhost:8080/v1/auth/register', {
       method: 'POST',
       body: JSON.stringify(user),
       headers: {
@@ -43,16 +45,16 @@ function buyStockTransaction(email, transactionDetails) {
       }
 
 
-  export function updateUserState(user) {
-        return fetch('http://localhost:8080/users', {
-          method: 'GET',
-          body: JSON.stringify(user),
-          headers: {
-            'content-type': 'application/json'
-          }
-        })
-        .then(data => data.json())
+  export function updateUserState(token) {
+    return fetch('http://localhost:8080/v1/users/profile', {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `${token.tokenType} ${token.accessToken}`
       }
+    })
+    .then(data => data.json())
+  }
 
 
   export function handleErrors(response) {

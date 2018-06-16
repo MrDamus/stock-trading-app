@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
-  name: "xyz",
-  email: "xyz@gmail.com",
-  password: "xyz"
+  name: "marcin2",
+  email: "marcin2@gmail.com",
+  password: "marcin2"
 }
 
 const loginForm = (state = INITIAL_STATE, action) => {

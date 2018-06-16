@@ -37,12 +37,14 @@ const userData = (state = INITIAL_STATE, action) => {
     case 'LOGIN_SUCCESS':
       return {
         ...state,
-        user: action.payload
+        user: action.payload.user,
+        token: action.payload.token,
       }
     case 'CREATE_NEW_USER_SUCCESS':
     return {
       ...state,
-      user: action.payload
+      user: action.payload.user,
+      token: action.payload.token
     }
     default:
       return state
