@@ -38,18 +38,7 @@ const CompanyInfo = ({ price, symbol, latestUpdate, openTime, closeTime, chart, 
       <p style={{ alignSelf: 'center' }}>
       {`Closing time: ${moment(closeTime).format('MMM DD h:mm A')}`}
       </p>
-      
       <CompanyFinancialInfo data={finances}/>
-    <div style= {{display: 'flex', justifyContent: 'center'}}>
-      { durations.map(duration => (
-        <Button
-          key={''}
-          onClick={() => getCompanyChart(symbol, duration)}
-        >
-          {duration.toUpperCase()}
-        </Button>))}
-    </div>
-    <Chart data={chart}/>
     <StockAmountPicker price={price} history={history} />
   </div>
 );
