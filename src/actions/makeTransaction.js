@@ -32,13 +32,10 @@ export function buyStock() {
 
     const transactionDetails = {
       symbol: details.symbol,
-      companyName: details.companyName,
       amount: amount,
-      price: details.latestPrice,
-      date: Date.now()
     }
 
-    return userService.buyStockTransaction(user.email, transactionDetails)
+    return userService.buyStockTransaction(user.id, transactionDetails)
     .then(data => {
       dispatch(login())
       return data
