@@ -9,7 +9,7 @@ const StockAmountPicker = ({ price, selectValue, buyStock, amount, message }) =>
   <FormGroup key="form" controlId="howMany" bsSize="large" style={{ display: 'flex', flexDirection: 'column' }} >
     <ControlLabel style={{ alignSelf: 'center' }}>Amount:</ControlLabel>
     <FormControl
-      style={{ width: '25%', alignSelf: 'center' }}
+      style={{ width: '15%', minWidth:'100px', alignSelf: 'center', textAlign: 'center'}}
       autoFocus
       type="number"
       placeholder="quantity"
@@ -54,14 +54,14 @@ const mapStateToProps = ({ stockPicker, transactions }) => ({
 })
 
 StockAmountPicker.propTypes = {
-  amount: PropTypes.string,
+  amount: PropTypes.number,
   price: PropTypes.number,
   selectValue: PropTypes.func,
   buyStock: PropTypes.func,
 };
 
 StockAmountPicker.defaultProps = {
-  amount: 'quantity',
+  amount: 0,
   price: 0,
   selectValue: () => null,
   buyStock: () => null,
