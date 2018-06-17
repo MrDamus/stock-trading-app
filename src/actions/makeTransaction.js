@@ -49,8 +49,8 @@ export function buyStock() {
 
 export function sellStock(transactionId) {
   return function (dispatch, getState) {
-    const { user } = getState().userData;
-    return userService.sellStockTransaction(user.email, transactionId)
+    const { user, token } = getState().userData;
+    return userService.sellStockTransaction(user.email, transactionId, token)
     .then(data => {
       dispatch(login())
       return data

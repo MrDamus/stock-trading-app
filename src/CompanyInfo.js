@@ -3,19 +3,13 @@ import './App.css'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import { Button } from 'react-bootstrap'
 import StockAmountPicker from './companyInfo/stockAmountPicker'
 import SearchBox from './homePage/searchBox'
-import Chart from './companyInfo/chart'
 import {getCompanyChart} from './actions/companyChart'
-import { getCompanyFinances } from './actions/companyFinances'
-import CompanyFinancialInfo from './companyInfo/companyFinancialInfo'
 import Summary from './companyInfo/summary'
 import NavBar from './companyInfo/navBar'
 
-const durations = ['1d', '1m', '3m', '6m', 'ytd', '1y', '2y', '5y'];
-
-const CompanyInfo = ({ price, symbol, latestUpdate, openTime, closeTime, chart, history, user, getCompanyChart, getCompanyFinances, finances }) => (
+const CompanyInfo = ({ price, latestUpdate, openTime, closeTime, history, user }) => (
   <div className="CompanyInfo"
     style={{ display: 'flex', flexDirection: 'column' }}>
     <p style={{ alignSelf: 'center' }}>
@@ -23,12 +17,6 @@ const CompanyInfo = ({ price, symbol, latestUpdate, openTime, closeTime, chart, 
     <SearchBox history={history} />
     <Summary />
     <NavBar />
-      <Button
-        style={{ alignSelf: 'center' }}
-        onClick={() => getCompanyFinances(symbol)}
-      >
-        Show financial information
-      </Button>
       <p style={{ alignSelf: 'center' }}>
       {`Latest update: ${moment(latestUpdate).format('MMM DD h:mm A')}`}
       </p>
@@ -38,20 +26,13 @@ const CompanyInfo = ({ price, symbol, latestUpdate, openTime, closeTime, chart, 
       <p style={{ alignSelf: 'center' }}>
       {`Closing time: ${moment(closeTime).format('MMM DD h:mm A')}`}
       </p>
-      <CompanyFinancialInfo data={finances}/>
     <StockAmountPicker price={price} history={history} />
   </div>
 );
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCompanyChart: (symbol, periodOfTime) => dispatch(getCompanyChart(symbol, periodOfTime))
-    ,
-    getCompanyFinances: (symbol) => dispatch(getCompanyFinances(symbol))
-      // .then(resp => companyFinancials.push(resp))
-      
-      .catch(error => alert('Sorry, could not load financial information.'))
-    ,
+    getCompanyChart: (symbol, periodOfTime) => dispatch(getCompanyChart(symbol, periodOfTime)),
   }
 }
 
@@ -75,7 +56,6 @@ CompanyInfo.propTypes = {
   openTime: PropTypes.number.isRequired,
   closeTime: PropTypes.number.isRequired,
   getCompanyChart: PropTypes.func.isRequired,
-  getCompanyFinances: PropTypes.func.isRequired,
 };
 
 CompanyInfo.defaultProps = {
