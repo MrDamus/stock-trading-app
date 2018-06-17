@@ -10,10 +10,11 @@ function buyStockTransaction(id, transactionDetails, token) {
     .then(data => data.json())
   }
 
-  function sellStockTransaction(email, transactionDetails, token) {
-    return fetch(`http://localhost:8080/v1/transaction/sell/${email}`, {
-         method: 'PUT',
-         body: JSON.stringify({ date: transactionDetails, amount: 1 }),
+  function sellStockTransaction(userID, transactionDetails, token) {
+    console.log(transactionDetails)
+    return fetch(`http://localhost:8080/v1/transaction/sell/${userID}`, {
+         method: 'POST',
+         body: JSON.stringify({ ...transactionDetails }),
          headers: {
            'content-type': 'application/json',
            'Authorization': `${token.tokenType} ${token.accessToken}`

@@ -1,5 +1,6 @@
 import userService from "../services/user";
 import { login } from "./loginForm";
+import { get } from "https";
 
 export const buyStockSuccess = (payload) => ({
   type: 'BUY_STOCK_SUCCESS',
@@ -47,10 +48,16 @@ export function buyStock() {
   };
 }
 
-export function sellStock(transactionId) {
+export function sellStock(purchasedStockID, symbol) {
   return function (dispatch, getState) {
     const { user, token } = getState().userData;
-    return userService.sellStockTransaction(user.email, transactionId, token)
+    const transactionDetails = {
+      symbol,
+      id: purchasedStockID,
+      // TODO: select amount
+      amount: 1, 
+    }
+    return userService.sellStockTransaction(user.id, transactionDetails, token)
     .then(data => {
       dispatch(login())
       return data

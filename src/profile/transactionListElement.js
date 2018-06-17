@@ -7,7 +7,7 @@ import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import { selectValue } from '../actions'
 
 const transactionListElement = ({ data, sell, amount }) => (
-<div key={data.date} style={{ display: "flex", justifyContent: "space-around" }}>
+<div key={data._id} style={{ display: "flex", justifyContent: "space-around" }}>
   <p>
     {`You own: ${data.amount}
   stock of ${data.symbol} ${data.companyName}
@@ -30,7 +30,7 @@ const transactionListElement = ({ data, sell, amount }) => (
         bsSize="small"
         bsStyle="warning"
         // type="submit"
-        onClick={() => sell(data.date)}
+        onClick={() => sell(data._id, data.symbol)}
       >
         Sell
       </Button>
@@ -40,7 +40,7 @@ const transactionListElement = ({ data, sell, amount }) => (
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    sell: (id) => dispatch(sellStock(id)),
+    sell: (id, symbol) => dispatch(sellStock(id, symbol)),
     selectValue: (user) => dispatch(selectValue(user)),
   }
 }
