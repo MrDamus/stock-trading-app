@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import moment from 'moment';
 import { sellStock } from '../actions/makeTransaction';
-import { Button } from 'react-bootstrap';
-import { connect } from 'react-redux'
+import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import { selectValue } from '../actions'
 
-const transactionListElement = ({ data, sell }) => (
+const transactionListElement = ({ data, sell, amount }) => (
 <div key={data.date} style={{ display: "flex", justifyContent: "space-around" }}>
   <p>
     {`You own: ${data.amount}
@@ -13,27 +14,41 @@ const transactionListElement = ({ data, sell }) => (
   company bought on ${moment(data.date).format('MMM DD h:mm A')}
   for ${data.price}$`}
   </p>
-  <p>
-    <Button
-      bsSize="small"
-      bsStyle="warning"
-      // type="submit"
-      onClick={() => sell(data.date)}
-    >
-      Sell
-    </Button>
-  </p>
+    <FormGroup key="form" controlId="howMany" bsSize="large" style={{ display: 'flex' }} >
+      <ControlLabel style={{ alignSelf: 'center', fontSize: '15px' }}>Amount:</ControlLabel>
+      <FormControl
+          style={{ minWidth:'100px', alignSelf: 'center', textAlign: 'center', padding: '0', height: '30px'}}
+          type="number"
+          placeholder="quantity"
+          min={0}
+          max={100000}
+          required
+          value={amount}
+          onChange={e => selectValue(e.target.value)}
+        />
+      <Button
+        bsSize="small"
+        bsStyle="warning"
+        // type="submit"
+        onClick={() => sell(data.date)}
+      >
+        Sell
+      </Button>
+    </FormGroup>
 </div>
 )
 
 const mapDispatchToProps = (dispatch) => {
   return {
     sell: (id) => dispatch(sellStock(id)),
+    selectValue: (user) => dispatch(selectValue(user)),
   }
 }
 
 transactionListElement.propTypes = {
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  sell: PropTypes.func.isRequired,
+  amount: PropTypes.number,
 }
 
 export default connect(null, mapDispatchToProps)(transactionListElement);
