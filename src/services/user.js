@@ -1,5 +1,7 @@
+import { SERVER_URL } from "../config";
+
 function buyStockTransaction(id, transactionDetails, token) {
-   return fetch(`http://localhost:8080/v1/transaction/buy/${id}`, {
+   return fetch(`${SERVER_URL}transaction/buy/${id}`, {
         method: 'POST',
         body: JSON.stringify(transactionDetails),
         headers: {
@@ -12,7 +14,7 @@ function buyStockTransaction(id, transactionDetails, token) {
 
   function sellStockTransaction(userID, transactionDetails, token) {
     console.log(transactionDetails)
-    return fetch(`http://localhost:8080/v1/transaction/sell/${userID}`, {
+    return fetch(`${SERVER_URL}transaction/sell/${userID}`, {
          method: 'POST',
          body: JSON.stringify({ ...transactionDetails }),
          headers: {
@@ -25,7 +27,7 @@ function buyStockTransaction(id, transactionDetails, token) {
 
   function login(email, password) {
     console.log(email, password)
-    return fetch('http://localhost:8080/v1/auth/login', {
+    return fetch(`${SERVER_URL}auth/login`, {
       method: 'POST',
       body: JSON.stringify({ password, email }),
       headers: {
@@ -36,7 +38,7 @@ function buyStockTransaction(id, transactionDetails, token) {
   }
 
   export function createNewUser(user) {
-    return fetch('http://localhost:8080/v1/auth/register', {
+    return fetch(`${SERVER_URL}auth/register`, {
       method: 'POST',
       body: JSON.stringify(user),
       headers: {
@@ -46,9 +48,8 @@ function buyStockTransaction(id, transactionDetails, token) {
       .then((data) => data.json())
       }
 
-
-  export function updateUserState(token) {
-    return fetch('http://localhost:8080/v1/users/profile', {
+  export function getProfile(token) {
+    return fetch(`${SERVER_URL}users/profile`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -57,7 +58,6 @@ function buyStockTransaction(id, transactionDetails, token) {
     })
     .then(data => data.json())
   }
-
 
   export function handleErrors(response) {
     if (!response.ok) {
@@ -72,5 +72,5 @@ export default {
   login,
   createNewUser,
   handleErrors,
-  updateUserState
+  getProfile
 }
