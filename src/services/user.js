@@ -1,7 +1,7 @@
-import { SERVER_URL } from "../config";
+import { SERVER_URL, ENPOINTS } from "../config";
 
 function buyStockTransaction(id, transactionDetails, token) {
-   return fetch(`${SERVER_URL}transaction/buy/${id}`, {
+   return fetch(`${SERVER_URL}${ENPOINTS.BUY}${id}`, {
         method: 'POST',
         body: JSON.stringify(transactionDetails),
         headers: {

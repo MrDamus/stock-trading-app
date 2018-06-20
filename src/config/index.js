@@ -4,5 +4,6 @@ export const ENPOINTS = {
   PROFILE: 'users/profile',
   LOGIN: 'auth/login',
   REGISTER: 'auth/register',
-
+  BUY: 'transaction/buy',
+  SELL: 'transaction/sell',
 }
