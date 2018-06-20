@@ -20,23 +20,7 @@ const mapStateToProps = ({ stockData }) => ({
 CompanyFinancialInfo.propTypes = {
   finances: PropTypes.arrayOf(PropTypes.shape({
     reportDate : String,
-    grossProfit: Number,
-    costOfRevenue: Number,
-    operatingRevenue: Number,
-    totalRevenue: Number,
-    operatingIncome: Number,
-    netIncome: Number,
-    researchAndDevelopment: Number,
-    operatingExpense: Number,
-    currentAssets: Number,
-    totalAssets: Number,
-    currentCash: Number,
-    currentDebt: Number,
-    totalCash: Number,
-    totalDebt: Number,
-    shareholderEquity: Number,
-    cashChange: Number,
-    cashFlow: Number
+    
   })),
 };
 
@@ -45,4 +29,4 @@ CompanyFinancialInfo.defaultProps = {
 
 }
 
-export default connect(mapStateToProps, null)(CompanyFinancialInfo);
+export default connect(mapStateToProps)(CompanyFinancialInfo);

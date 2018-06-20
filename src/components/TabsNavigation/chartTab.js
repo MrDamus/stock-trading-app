@@ -31,26 +31,19 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = ({stockData}) => ({
-  price: stockData.details.latestPrice,
   symbol: stockData.details.symbol,
   chart: stockData.chartData,
 })
 
 ChartTab.propTypes = {
-  price: PropTypes.any.isRequired,
   symbol: PropTypes.string.isRequired,
   chart: PropTypes.array.isRequired,
-  history: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
   getCompanyChart: PropTypes.func.isRequired,
 };
 
 ChartTab.defaultProps = {
-  price: 0,
   symbol: '',
   chart: [],
-  history: {},
-  user: {},
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChartTab);
