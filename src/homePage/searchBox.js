@@ -18,13 +18,14 @@ class SearchBox extends Component {
     const { companies, getCompanyDetails } = this.props;
     const companiesToDisplay = inputValue ? searching(companies, inputValue).slice(0, 5) : []
     return (
-        <form style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+        <form onSubmit={event => event.preventDefault()} style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
           <input
             style={{ alignSelf: 'center', textAlign: 'center' }}
             type="text"
             id="searchInput"
             onChange={(e) =>  this.setState({inputValue: e.currentTarget.value.toUpperCase().replace(/\W/g, '')})}
             placeholder="Search for company">
+            
           </input>
           <Suggestions
             companies={companiesToDisplay}
