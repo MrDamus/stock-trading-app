@@ -1,45 +1,45 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
+import ReactTable from "react-table"
+import "react-table/react-table.css"
 
-const QuoteInfo = ({ details }) => (
-  <div style={{ alignSelf: 'center' }}>
-    { Object.keys(details)
-        .filter(key => details[key]) 
-        .map((key, i) => <p key={details[key]+i} style={{ alignSelf: 'center' }}>{`${key}: ${details[key]}`}</p>)}
-  </div>
-)
-
-const mapStateToProps = ({ stockData }) => ({
-  details: stockData.details,
-})
-
-QuoteInfo.propTypes = {
-  details: PropTypes.arrayOf(PropTypes.shape({
-    reportDate : String,
-    grossProfit: Number,
-    costOfRevenue: Number,
-    operatingRevenue: Number,
-    totalRevenue: Number,
-    operatingIncome: Number,
-    netIncome: Number,
-    researchAndDevelopment: Number,
-    operatingExpense: Number,
-    currentAssets: Number,
-    totalAssets: Number,
-    currentCash: Number,
-    currentDebt: Number,
-    totalCash: Number,
-    totalDebt: Number,
-    shareholderEquity: Number,
-    cashChange: Number,
-    cashFlow: Number
-  })),
-};
-
-QuoteInfo.defaultProps = {
-  grossProfit: '0',
-
+const transformData = (data) => {
+  const returnData = data[0] ? Object.keys(data[0]).map(key => ({
+    key,
+    [data[0].reportDate]: data[0][key]
+  })) : [];
+  return returnData;
 }
 
-export default connect(mapStateToProps, null)(QuoteInfo);
+const CompanyFinancialInfo = ({ finances }) => (
+    <ReactTable
+      data={finances}
+      columns={[
+        {
+          Header: "",
+          columns: [
+            {
+              Header: "Key",
+              accessor: finances.key
+            }
+          ]
+        },
+        {
+          Header: "Date",
+          columns: finances[0] ? Object.keys(finances[0]).map((v) => 
+            ({
+              Header: v,
+              accessor: v
+            })) : []
+        },
+      ]}
+      defaultPageSize={10}
+      className="-striped -highlight"
+    />
+);
+
+const mapStateToProps = ({ stockData }) => ({
+  finances: stockData.finances ? transformData(stockData.finances) : [{}],
+})
+      
+export default connect(mapStateToProps)(CompanyFinancialInfo);

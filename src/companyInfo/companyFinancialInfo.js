@@ -6,10 +6,12 @@ const CompanyFinancialInfo = ({ finances }) => (
   <div style={{ alignSelf: 'center' }}>
 
      {/* TODO: ADD F=CHART FORM D3  */}
-    {finances.map((data) => 
+    {finances ? finances.map((data) => 
       Object.keys(data)
         .filter(key => data[key]) 
-        .map((key, i) => <p key={data[key]+i} style={{ alignSelf: 'center' }}>{`${key}: ${data[key]}`}</p>))}
+        .map((key, i) => <p key={data[key]+i} style={{ alignSelf: 'center' }}>{`${key}: ${data[key]}`}</p>))
+      : null
+    }
   </div>
 )
 
