@@ -13,11 +13,11 @@ export const inputValue = (payload) => ({
   payload
 })
 
-const serverUrl = 'http://localhost:8080/users/'
+const SERVER_URL = 'http://localhost:8081/'
 
 export function clearDatabase(e) {
   return function () {
-    fetch(serverUrl, {
+    fetch(`${SERVER_URL}users/`, {
       method: 'DELETE',
       body: e,
     })

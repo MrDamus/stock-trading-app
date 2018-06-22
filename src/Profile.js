@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { sellStock } from './actions/makeTransaction';
 import FacebookShareButton from './profile/socialMediaButtons/facebookShareButton'
 import TwitterShareButton from './profile/socialMediaButtons/twitterShareButton'
 import GoogleShareButton from './profile/socialMediaButtons/googleShareButton'
@@ -23,12 +22,6 @@ const Profile = ({ user }) => (
       </div>
     );
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    sellStock: () => dispatch(sellStock()),
-  }
-}
-
 const mapStateToProps = ({ userData }) => ({
   user: userData.user,
 })
@@ -37,4 +30,4 @@ Profile.propTypes = {
   user: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps)(Profile);
