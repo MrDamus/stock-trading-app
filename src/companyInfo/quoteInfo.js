@@ -1,45 +1,40 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import ReactTable from "react-table"
-import "react-table/react-table.css"
+import PropTypes from 'prop-types'
 
-const transformData = (data) => {
-  const returnData = data[0] ? Object.keys(data[0]).map(key => ({
-    key,
-    [data[0].reportDate]: data[0][key]
-  })) : [];
-  return returnData;
-}
-
-const CompanyFinancialInfo = ({ finances }) => (
-    <ReactTable
-      data={finances}
-      columns={[
-        {
-          Header: "",
-          columns: [
-            {
-              Header: "Key",
-              accessor: finances.key
-            }
-          ]
-        },
-        {
-          Header: "Date",
-          columns: finances[0] ? Object.keys(finances[0]).map((v) => 
-            ({
-              Header: v,
-              accessor: v
-            })) : []
-        },
-      ]}
-      defaultPageSize={10}
-      className="-striped -highlight"
-    />
-);
+// TODO: change finances for details it's object so map doesn't work
+const QuoteInfo = ({ details }) => (
+  <div style={{ alignSelf: 'center' }}>
+    {details ? Object.keys(details)
+        .map((key, i) => (
+          <div key={details[key]} style={{display: 'flex'}}>
+            <p style={{ }}>
+            {key}
+            </p>
+            <p>
+              {details[key]}
+            </p>  
+          </div>
+        ))
+      : null
+    }
+  </div>
+)
 
 const mapStateToProps = ({ stockData }) => ({
-  finances: stockData.finances ? transformData(stockData.finances) : [{}],
+  details: stockData.details,
 })
-      
-export default connect(mapStateToProps)(CompanyFinancialInfo);
+
+QuoteInfo.propTypes = {
+  finances: PropTypes.arrayOf(PropTypes.shape({
+    reportDate : String,
+    
+  })),
+};
+
+QuoteInfo.defaultProps = {
+  grossProfit: '0',
+
+}
+
+export default connect(mapStateToProps)(QuoteInfo);
