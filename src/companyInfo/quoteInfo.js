@@ -2,11 +2,22 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
+// TODO: change finances for details it's object so map doesn't work
 const QuoteInfo = ({ details }) => (
   <div style={{ alignSelf: 'center' }}>
-    { Object.keys(details)
-        .filter(key => details[key]) 
-        .map((key, i) => <p key={details[key]+i} style={{ alignSelf: 'center' }}>{`${key}: ${details[key]}`}</p>)}
+    {details ? Object.keys(details)
+        .map((key, i) => (
+          <div key={details[key]} style={{display: 'flex'}}>
+            <p style={{ }}>
+            {key}
+            </p>
+            <p>
+              {details[key]}
+            </p>  
+          </div>
+        ))
+      : null
+    }
   </div>
 )
 
@@ -15,25 +26,9 @@ const mapStateToProps = ({ stockData }) => ({
 })
 
 QuoteInfo.propTypes = {
-  details: PropTypes.arrayOf(PropTypes.shape({
+  finances: PropTypes.arrayOf(PropTypes.shape({
     reportDate : String,
-    grossProfit: Number,
-    costOfRevenue: Number,
-    operatingRevenue: Number,
-    totalRevenue: Number,
-    operatingIncome: Number,
-    netIncome: Number,
-    researchAndDevelopment: Number,
-    operatingExpense: Number,
-    currentAssets: Number,
-    totalAssets: Number,
-    currentCash: Number,
-    currentDebt: Number,
-    totalCash: Number,
-    totalDebt: Number,
-    shareholderEquity: Number,
-    cashChange: Number,
-    cashFlow: Number
+    
   })),
 };
 
@@ -42,4 +37,4 @@ QuoteInfo.defaultProps = {
 
 }
 
-export default connect(mapStateToProps, null)(QuoteInfo);
+export default connect(mapStateToProps)(QuoteInfo);
