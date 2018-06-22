@@ -53,7 +53,6 @@ export function sellStock(purchasedStockID, symbol, amount) {
     const transactionDetails = {
       symbol,
       id: purchasedStockID,
-      // TODO: select amount
       amount: amount, 
     }
     return userService.sellStockTransaction(user.id, transactionDetails, token)

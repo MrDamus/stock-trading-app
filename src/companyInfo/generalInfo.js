@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-const Summary = ({ symbol, logo, companyName, price, change, changePercent, sector }) => (
+const GeneralInfo = ({ symbol, logo, companyName, price, change, changePercent, sector }) => (
   <div>
     <img style={{ maxWidth: '128px'}} src={logo.url} alt={companyName}/>
     <p style={{ alignSelf: 'center' }}>{`${symbol} ${companyName}`}</p>
@@ -27,7 +27,7 @@ const mapStateToProps = ({stockData, userData}) => ({
   logo: stockData.logo,
 })
 
-Summary.propTypes = {
+GeneralInfo.propTypes = {
   price: PropTypes.any.isRequired,
   symbol: PropTypes.string.isRequired,
   companyName: PropTypes.string.isRequired,
@@ -37,7 +37,7 @@ Summary.propTypes = {
   logo: PropTypes.object.isRequired,
 }
 
-Summary.defaultProps = {
+GeneralInfo.defaultProps = {
   price: 0,
   symbol: '',
   companyName: '',
@@ -49,4 +49,4 @@ Summary.defaultProps = {
 }
 
 
-export default connect(mapStateToProps, null)(Summary);
+export default connect(mapStateToProps, null)(GeneralInfo);

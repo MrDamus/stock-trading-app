@@ -1,48 +1,54 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
+import ReactTable from "react-table"
+import "react-table/react-table.css"
 
-const CompanyFinancialInfo = ({ finances }) => (
-  <div style={{ alignSelf: 'center' }}>
-
-     {/* TODO: ADD F=CHART FORM D3  */}
-    {finances.map((data) => 
-      Object.keys(data)
-        .filter(key => data[key]) 
-        .map((key, i) => <p key={data[key]+i} style={{ alignSelf: 'center' }}>{`${key}: ${data[key]}`}</p>))}
-  </div>
-)
-
-const mapStateToProps = ({ stockData }) => ({
-  finances: stockData.finances,
-})
-
-CompanyFinancialInfo.propTypes = {
-  finances: PropTypes.arrayOf(PropTypes.shape({
-    reportDate : String,
-    grossProfit: Number,
-    costOfRevenue: Number,
-    operatingRevenue: Number,
-    totalRevenue: Number,
-    operatingIncome: Number,
-    netIncome: Number,
-    researchAndDevelopment: Number,
-    operatingExpense: Number,
-    currentAssets: Number,
-    totalAssets: Number,
-    currentCash: Number,
-    currentDebt: Number,
-    totalCash: Number,
-    totalDebt: Number,
-    shareholderEquity: Number,
-    cashChange: Number,
-    cashFlow: Number
-  })),
-};
-
-CompanyFinancialInfo.defaultProps = {
-  grossProfit: '0',
-
+const transformData = (data) => {
+  const returnData = data[0] ? Object.keys(data[0])
+  .slice(1)
+  .map(key => ({
+    key: key.replace(/([A-Z]+)/g, ' $1'),
+    [data[0].reportDate]: data[0][key],
+    [data[1].reportDate]: data[1][key],
+    [data[2].reportDate]: data[2][key],
+    [data[3].reportDate]: data[3][key],
+  })) : [];
+  return returnData;
 }
 
-export default connect(mapStateToProps, null)(CompanyFinancialInfo);
+const CompanyFinancialInfo = ({ finances }) => (
+    <ReactTable
+      data={finances}
+      columns={[
+        {
+          Header: "Property",
+          columns: [
+            {
+              Header: "Assets",
+              accessor: 'key'
+            }
+          ]
+        },
+        {
+          Header: "Date",
+          columns: 
+          finances[0] ? Object.keys(finances[0])
+          .filter(v => v !== 'key')
+          .map((v) => 
+            ({
+              Header: v,
+              accessor: v
+            })) : [],
+            
+        },
+      ]}
+      defaultPageSize={10}
+      className="-striped -highlight"
+    />
+);
+
+const mapStateToProps = ({ stockData }) => ({
+  finances: stockData.finances ? transformData(stockData.finances) : [{}],
+})
+      
+export default connect(mapStateToProps)(CompanyFinancialInfo);

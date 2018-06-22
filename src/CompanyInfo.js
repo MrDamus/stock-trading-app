@@ -6,7 +6,7 @@ import moment from 'moment'
 import StockAmountPicker from './companyInfo/stockAmountPicker'
 import SearchBox from './homePage/searchBox'
 import {getCompanyChart} from './actions/companyChart'
-import Summary from './companyInfo/summary'
+import GeneralInfo from './companyInfo/generalInfo'
 import NavBar from './companyInfo/navBar'
 
 const CompanyInfo = ({ price, latestUpdate, openTime, closeTime, history, user }) => (
@@ -15,7 +15,7 @@ const CompanyInfo = ({ price, latestUpdate, openTime, closeTime, history, user }
     <p style={{ alignSelf: 'center' }}>
       Current money: {user.money}</p>
     <SearchBox history={history} />
-    <Summary />
+    <GeneralInfo />
     <NavBar />
       <p style={{ alignSelf: 'center' }}>
       {`Latest update: ${moment(latestUpdate).format('MMM DD h:mm A')}`}

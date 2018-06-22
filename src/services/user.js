@@ -1,7 +1,7 @@
-import { SERVER_URL } from "../config";
+import { SERVER_URL, ENDPOINTS } from "../config";
 
 function buyStockTransaction(id, transactionDetails, token) {
-   return fetch(`${SERVER_URL}transaction/buy/${id}`, {
+   return fetch(`${SERVER_URL}${ENDPOINTS.BUY}${id}`, {
         method: 'POST',
         body: JSON.stringify(transactionDetails),
         headers: {
@@ -13,8 +13,7 @@ function buyStockTransaction(id, transactionDetails, token) {
   }
 
   function sellStockTransaction(userID, transactionDetails, token) {
-    console.log(transactionDetails)
-    return fetch(`${SERVER_URL}transaction/sell/${userID}`, {
+    return fetch(`${SERVER_URL}${ENDPOINTS.SELL}${userID}`, {
          method: 'POST',
          body: JSON.stringify({ ...transactionDetails }),
          headers: {
@@ -27,7 +26,7 @@ function buyStockTransaction(id, transactionDetails, token) {
 
   function login(email, password) {
     console.log(email, password)
-    return fetch(`${SERVER_URL}auth/login`, {
+    return fetch(`${SERVER_URL}${ENDPOINTS.LOGIN}`, {
       method: 'POST',
       body: JSON.stringify({ password, email }),
       headers: {
@@ -38,7 +37,7 @@ function buyStockTransaction(id, transactionDetails, token) {
   }
 
   export function createNewUser(user) {
-    return fetch(`${SERVER_URL}auth/register`, {
+    return fetch(`${SERVER_URL}${ENDPOINTS.REGISTER}`, {
       method: 'POST',
       body: JSON.stringify(user),
       headers: {
@@ -49,7 +48,7 @@ function buyStockTransaction(id, transactionDetails, token) {
       }
 
   export function getProfile(token) {
-    return fetch(`${SERVER_URL}users/profile`, {
+    return fetch(`${SERVER_URL}${ENDPOINTS.PROFILE}`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',

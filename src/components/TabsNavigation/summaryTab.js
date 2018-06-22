@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import CompanyFinancialInfo from '../../companyInfo/companyFinancialInfo'
+import QuoteInfo from '../../companyInfo/quoteInfo'
 
-const FinancialTab = ({ finances }) => (
+const SummaryTab = ({ details }) => (
   <div style= {{}}>
     <div style= {{display: 'flex', justifyContent: 'center'}}>
-      <CompanyFinancialInfo data={finances}/>
+      <QuoteInfo data={details}/>
     </div>
   </div>
 );
@@ -16,15 +16,15 @@ const mapStateToProps = ({stockData}) => ({
   symbol: stockData.details.symbol,
 })
 
-FinancialTab.propTypes = {
+SummaryTab.propTypes = {
   price: PropTypes.any.isRequired,
   symbol: PropTypes.string.isRequired,
-  finances: PropTypes.object.isRequired,
+  details: PropTypes.object.isRequired,
 };
 
-FinancialTab.defaultProps = {
+SummaryTab.defaultProps = {
   price: 0,
   symbol: '',
 }
 
-export default connect(mapStateToProps)(FinancialTab);
+export default connect(mapStateToProps)(SummaryTab);
