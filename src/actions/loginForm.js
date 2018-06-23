@@ -38,9 +38,11 @@ export const createNewUserError = (payload) => ({
 export function login() {
   return function (dispatch, getState) {
     const user  = getState().loginForm;
-    console.log(user)
-    return userService.login(user.email, user.password).then(
-      getState => dispatch(loginSuccess(getState)) ,
+    return userService.login(user.email, user.password)
+    .then(resp => {
+      localStorage.setItem('token', JSON.stringify(resp.token));
+      dispatch(loginSuccess(resp));
+    },
       error => {
         dispatch(loginError(error))
         throw new Error(error)
@@ -52,10 +54,11 @@ export function login() {
 export function createNewUser() {
   return function (dispatch, getState) {
     const user  = getState().loginForm;
-
     return userService.createNewUser(user)
-    .then(
-      getState => dispatch(createNewUserSuccess(getState)) ,
+    .then(resp => {
+      localStorage.setItem('token', JSON.stringify(resp.token));
+      dispatch(createNewUserSuccess(resp));
+    },
       error => {
         dispatch(createNewUserError(error))
         throw new Error(error)

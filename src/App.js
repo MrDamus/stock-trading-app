@@ -7,11 +7,20 @@ import Profile from './Profile'
 import { connect } from 'react-redux'
 import { fetchCompaniesData } from './actions/stockData'
 import PropTypes from 'prop-types'
+import { getProfile } from './actions/user';
 
 class App extends Component {
   componentDidMount() {
+    const { getProfile } = this.props;
     if (this.props.companies.length <= 0)
     this.props.fetchCompaniesData()
+    // check 
+    const tokenString = localStorage.getItem('token');
+
+    if (typeof tokenString == 'string') {
+      const token = JSON.parse(tokenString);
+      getProfile(token)
+    }
   }
 
   render() {
@@ -57,6 +66,8 @@ const mapStateToProps = ({companies}) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchCompaniesData: () =>  dispatch(fetchCompaniesData()),
+    getProfile: (token) => dispatch(getProfile(token)),
+
   }
 }
 
