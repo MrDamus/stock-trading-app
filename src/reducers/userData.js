@@ -40,6 +40,12 @@ const userData = (state = INITIAL_STATE, action) => {
         user: action.payload.user,
         token: action.payload.token,
       }
+    case 'GET_PROFILE_SUCCESS':
+    console.warn(action.payload)
+      return {
+        ...state,
+        user: action.payload,
+      }
     case 'CREATE_NEW_USER_SUCCESS':
     return {
       ...state,
