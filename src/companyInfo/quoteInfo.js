@@ -1,18 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import moment from 'moment'  // some needs to use this to convert timestamp
 
-// TODO: change finances for details it's object so map doesn't work
+var timestampRegex = new RegExp('^\\d+$');
+
+const isTimestamp = (input) => input.toString().match(timestampRegex)
 const QuoteInfo = ({ details }) => (
-  <div style={{ alignSelf: 'center' }}>
+  <div style={{ display: 'flex', flexFlow: 'column wrap', height: '325px', justifyContent: 'space-between' }}>
     {details ? Object.keys(details)
         .map((key, i) => (
           <div key={details[key]} style={{display: 'flex'}}>
-            <p style={{ }}>
-            {key}
+            <p style={{ marginRight: '5px'}}>
+              {fixStr(key)}: 
             </p>
             <p>
-              {details[key]}
+              {isTimestamp(details[key])
+                ? moment(details[key]).format('MMM DD h:mm A'): // filter shorter than 9 digits
+                details[key]}
             </p>  
           </div>
         ))
@@ -20,6 +25,18 @@ const QuoteInfo = ({ details }) => (
     }
   </div>
 )
+
+function fixStr(str) {
+  var out = str.replace(/^[a-z]|[^\s][A-Z]/g, function(str, offset) {
+      if (offset == 0) {
+          return(str.toUpperCase());
+      } else {
+          return(str.substr(0,1) + " " + str.substr(1).toUpperCase());
+      }
+  });
+  return(out);
+}
+
 
 const mapStateToProps = ({ stockData }) => ({
   details: stockData.details,
