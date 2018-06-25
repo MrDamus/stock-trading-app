@@ -5,9 +5,7 @@ import QuoteInfo from '../../companyInfo/quoteInfo'
 
 const SummaryTab = ({ details }) => (
   <div style= {{}}>
-    <div style= {{display: 'flex', justifyContent: 'center'}}>
       <QuoteInfo data={details}/>
-    </div>
   </div>
 );
 

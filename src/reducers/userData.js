@@ -41,7 +41,6 @@ const userData = (state = INITIAL_STATE, action) => {
         token: action.payload.token,
       }
     case 'GET_PROFILE_SUCCESS':
-    console.warn(action.payload)
       return {
         ...state,
         user: action.payload,
