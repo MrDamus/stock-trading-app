@@ -3,7 +3,6 @@ import './App.css'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import StockAmountPicker from './companyInfo/stockAmountPicker'
 import SearchBox from './homePage/searchBox'
 import {getCompanyChart} from './actions/companyChart'
 import GeneralInfo from './companyInfo/generalInfo'
@@ -26,7 +25,6 @@ const CompanyInfo = ({ price, latestUpdate, openTime, closeTime, history, user }
       <p style={{ alignSelf: 'center' }}>
       {`Closing time: ${moment(closeTime).format('MMM DD h:mm A')}`}
       </p>
-    <StockAmountPicker price={price} history={history} />
   </div>
 );
 

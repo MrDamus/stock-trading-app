@@ -1,14 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import StockAmountPicker from './stockAmountPicker'
 
-const GeneralInfo = ({ symbol, logo, companyName, price, change, changePercent, sector }) => (
-  <div>
-    <img style={{ maxWidth: '128px'}} src={logo.url} alt={companyName}/>
-    <p style={{ alignSelf: 'center' }}>{`${symbol} ${companyName}`}</p>
-    <p style={{ alignSelf: 'center' }}>{`Sector: ${sector} `}</p>
-    <p style={{ alignSelf: 'center' }}>{`Last price: ${price}`}</p>
-    <p style={{ alignSelf: 'center', color: change > 0 ? 'green' : 'red'}}>{`Change: ${change} (${changePercent}%)`}</p>
+const GeneralInfo = ({ logo, companyName, price, change, changePercent, symbol, history }) => (
+  <div style={{display: 'flex', justifyContent: ''}}>
+    <div>
+      <img style={{ maxWidth: '128px'}} src={logo.url} alt={companyName}/>
+    </div>
+    <div style={{display: 'flex', flexDirection: 'column', alignSelf: 'center'}}>
+      <p style={{ alignSelf: 'center' }}>{`${symbol} ${companyName}`}</p>
+      <p >{`Last price: ${price}`}</p>
+      <p style={{ alignSelf: 'center' }}>
+        Change:
+      </p>
+        <p style={{ alignSelf: 'center', color: change > 0 ? 'green' : 'red'}}>{`$${change} (${changePercent}%)`}</p>
+    </div>
+    <StockAmountPicker price={price} history={history} />
   </div>
 );
 

@@ -19,7 +19,6 @@ const StockAmountPicker = ({ price, selectValue, buyStock, amount, message }) =>
       value={amount}
       onChange={e => selectValue(e.target.value)}
     />
-    <p style={{ alignSelf: 'center' }}>price: {price}</p>
     <p style={{ alignSelf: 'center' }}>This will cost: {cost(amount, price)}</p>
     <div style={{ alignSelf: 'center' }}>
       <Button
@@ -40,7 +39,7 @@ const cost = (amount, price) => {
   return (amount * price).toFixed(2)
 }
 
-const mapDispatchToProps = (dispatch, { history }) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     selectValue: (user) => dispatch(selectValue(user)),
     buyStock: () => dispatch(buyStock())
