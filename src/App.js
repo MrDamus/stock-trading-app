@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import HomePage from './HomePage'
 import CompanyInfo from './CompanyInfo'
 import Login from './Login'
@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import { fetchCompaniesData } from './actions/stockData'
 import PropTypes from 'prop-types'
 import { getProfile } from './actions/user';
+import NotFound from './components/notFound';
 
 class App extends Component {
   componentDidMount() {
@@ -16,10 +17,18 @@ class App extends Component {
     this.props.fetchCompaniesData()
     // check 
     const tokenString = localStorage.getItem('token');
-
     if (typeof tokenString == 'string') {
-      const token = JSON.parse(tokenString);
-      getProfile(token)
+      try {
+        const token = JSON.parse(tokenString);
+        getProfile(token)
+          .then((result) => {
+            // history.push('./profile');
+          }).catch((err) => {
+            
+          });
+      } catch (err) {
+        console.warn(err)
+      }
     }
   }
 
@@ -49,10 +58,13 @@ class App extends Component {
             </li>
           </ul>
           <hr />
-          <Route exact path="/" component={HomePage} />
-          <Route path="/info" component={CompanyInfo} />
-          <Route path="/login" component={Login} />
-          <Route path="/profile" component={Profile} />
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/info" component={CompanyInfo} />
+            <Route path="/login" component={Login} />
+            <Route path="/profile" component={Profile} />
+            <Route component={NotFound} />
+          </Switch>
         </div>
       </Router>
     );
