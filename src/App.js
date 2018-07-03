@@ -17,7 +17,7 @@ class App extends Component {
     this.props.fetchCompaniesData()
     // check 
     const tokenString = localStorage.getItem('token');
-    if (typeof tokenString == 'string') {
+    if (typeof tokenString === 'string') {
       try {
         const token = JSON.parse(tokenString);
         getProfile(token)

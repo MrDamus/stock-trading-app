@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import StockAmountPicker from './stockAmountPicker'
 
 const GeneralInfo = ({ logo, companyName, price, change, changePercent, symbol, history }) => (
-  <div style={{display: 'flex', justifyContent: ''}}>
+  <div style={{display: 'flex', justifyContent: 'space-around'}}>
     <div>
       <img style={{ maxWidth: '128px'}} src={logo.url} alt={companyName}/>
     </div>
@@ -55,6 +55,5 @@ GeneralInfo.defaultProps = {
   changePercent: 0,
   logo: {}
 }
-
 
 export default connect(mapStateToProps, null)(GeneralInfo);

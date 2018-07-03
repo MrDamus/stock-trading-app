@@ -4,9 +4,7 @@ import PropTypes from 'prop-types'
 import QuoteInfo from '../../companyInfo/quoteInfo'
 
 const SummaryTab = ({ details }) => (
-  <div style= {{}}>
       <QuoteInfo data={details}/>
-  </div>
 );
 
 const mapStateToProps = ({stockData}) => ({
