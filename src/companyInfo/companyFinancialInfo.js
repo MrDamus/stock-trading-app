@@ -7,7 +7,9 @@ const transformData = (data) => {
   const returnData = data[0] ? Object.keys(data[0])
   .slice(1)
   .map(key => ({
-    key: key.replace(/([A-Z]+)/g, ' $1'),
+    key: key
+      .replace(/([A-Z]+)/g, ' $1')
+      .replace(/^\w/, c => c.toUpperCase()),
     [data[0].reportDate]: data[0][key],
     [data[1].reportDate]: data[1][key],
     [data[2].reportDate]: data[2][key],
@@ -18,6 +20,7 @@ const transformData = (data) => {
 
 const CompanyFinancialInfo = ({ finances }) => (
     <ReactTable
+      style={{ textAlign: 'center' }}
       data={finances}
       columns={[
         {
