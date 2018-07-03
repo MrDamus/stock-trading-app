@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import moment from 'moment'  // some needs to use this to convert timestamp
 
-// var timestampRegex = new RegExp('^\\d+$');
 var timestampRegex = new RegExp('^\\d{13}$');
 
 const isTimestamp = (input) => input.toString().match(timestampRegex)

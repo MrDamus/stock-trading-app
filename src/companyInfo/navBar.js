@@ -5,16 +5,16 @@ import ChartTab from '../components/TabsNavigation/chartTab'
 import SummaryTab from '../components/TabsNavigation/summaryTab';
 
 const NavBar = () => (
-  <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
-  <Tab eventKey={1} title="Summary">
-    <SummaryTab/>
-  </Tab>
-  <Tab eventKey={2} title="Chart">
-    <ChartTab />
-  </Tab>
-  <Tab eventKey={3} title="Financial">
-    <CompanyFinancialInfo />
-  </Tab>
+  <Tabs defaultActiveKey={3} id="uncontrolled-tab-example" justified >
+    <Tab eventKey={1} title="Summary">
+      <SummaryTab/>
+    </Tab>
+    <Tab eventKey={2} title="Chart">
+      <ChartTab />
+    </Tab>
+    <Tab eventKey={3} title="Financial">
+      <CompanyFinancialInfo />
+    </Tab>
   </Tabs>
 )
 

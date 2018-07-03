@@ -9,7 +9,7 @@ class SearchBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputValue: '',
+      inputValue: 'aapl',
     };
   }
 
