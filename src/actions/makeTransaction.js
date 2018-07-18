@@ -10,8 +10,7 @@ export const buyStockError = (payload) => {
   return {
   type: 'BUY_STOCK_ERROR',
   payload
-}
-}
+}}
 
 export const sellStockSuccess = (payload) => ({
   type: 'SELL_STOCK_SUCCESS',

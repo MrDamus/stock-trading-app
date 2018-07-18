@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { sellStock } from '../actions/makeTransaction';
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
-import { selectValue } from '../actions'
+// import { selectValue } from '../actions'
 
 class TransactionListElement extends Component {
   constructor(props) {
@@ -52,7 +52,7 @@ class TransactionListElement extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     sell: (id, symbol, amount) => dispatch(sellStock(id, symbol, amount)),
-    selectValue: (user) => dispatch(selectValue(user)),
+    // selectValue: (user) => dispatch(selectValue(user)),
   }
 }
 

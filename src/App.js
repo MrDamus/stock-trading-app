@@ -22,7 +22,7 @@ class App extends Component {
         const token = JSON.parse(tokenString);
         getProfile(token)
           .then((result) => {
-            // history.push('./profile');
+            history.push('./profile');
           }).catch((err) => {
             
           });

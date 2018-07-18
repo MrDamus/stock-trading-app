@@ -25,7 +25,6 @@ function buyStockTransaction(id, transactionDetails, token) {
    }
 
   function login(email, password) {
-    console.log(email, password)
     return fetch(`${SERVER_URL}${ENDPOINTS.LOGIN}`, {
       method: 'POST',
       body: JSON.stringify({ password, email }),
