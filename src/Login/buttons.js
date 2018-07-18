@@ -71,7 +71,7 @@ Buttons.propTypes = {
   login: PropTypes.func.isRequired,
   clearDatabase: PropTypes.func.isRequired,
   createNewUser: PropTypes.func.isRequired,
-  isInputValid: PropTypes.string
+  isInputValid: PropTypes.bool
 };
 
 Buttons.defaultProps = {

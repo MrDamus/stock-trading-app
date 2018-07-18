@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import moment from 'moment'  // some needs to use this to convert timestamp
+import moment from 'moment'
 
 var timestampRegex = new RegExp('^\\d{13}$');
 
@@ -16,7 +16,7 @@ const QuoteInfo = ({ details }) => (
             </p>
             <p>
               {isTimestamp(details[key])
-                ? moment(details[key]).format('MMM DD h:mm A'): // filter shorter than 9 digits
+                ? moment(details[key]).format('MMM DD h:mm A'):
                 details[key]}
             </p>  
           </div>

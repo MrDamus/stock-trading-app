@@ -18,7 +18,9 @@ class SearchBox extends Component {
     const { companies, getCompanyDetails } = this.props;
     const companiesToDisplay = inputValue ? searching(companies, inputValue).slice(0, 5) : []
     return (
-        <form onSubmit={event => event.preventDefault()} style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+        <form 
+          onSubmit={event => event.preventDefault()}
+          style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
           <input
             style={{ alignSelf: 'center', textAlign: 'center' }}
             type="text"
