@@ -12,6 +12,7 @@ import NotFound from './components/notFound';
 
 class App extends Component {
   componentDidMount() {
+    const { history } = this.props;
     const { getProfile } = this.props;
     if (this.props.companies.length <= 0)
     this.props.fetchCompaniesData()
